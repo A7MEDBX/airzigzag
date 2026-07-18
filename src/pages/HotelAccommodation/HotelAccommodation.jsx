@@ -7,11 +7,11 @@ import Container from '../../components/common/Container/Container';
 import Button from '../../components/common/Button/Button';
 import { fadeUp, fadeInLeft, fadeInRight } from '../../constants/animations';
 
-const heroPhoto        = 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1600&q=85';
-const hotelExterior    = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80';
-const luxuryRoom       = 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=900&q=80';
-const crewRoom         = 'https://images.unsplash.com/photo-1631049552240-59c37f38802b?auto=format&fit=crop&w=900&q=80';
-const ctaBg            = 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=80';
+const heroPhoto = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCA-j43TbgZF9uE93tnLcDJeEfaFMvaqFo0tBO10uN3HT92CPG6xJFwlYvNuJLZToWzXl1CFDCoNNFUzdtaRCt7eWtDa4wLm3tFU579Rse9YurqPEvcD5n0gPgp6HIJWoT_9nHI2RAvxE02rs2KRJDrdNeannIZKNT59eQ40swC61K1uiL7g16nMVGi7B5DYV6S0aepQfQdF1FvTQJUgNezyHGRLa0GELBHlO84vhxD9mqaHijdJhwW=w1200';
+const hotelExterior = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAx_TLWtZ0j9xTrtEfR7unHERNdiqpzDOpSpJcpo_15QcHsQ8mWlLDwOT8PVA2Xd1ndk8nu-fEOWS4Iw3bb0jXzLUk-iHn90tq_haIGiMGDjSJyJCQS7m-qnZwJ6MBCvVpyPJiZliwZHt4wD21hbT0bWakUjQZNb_ukHPbK8vQ3apR521awT12QmFpUzJZxzbcYrkEcivb17SNBywQc2wW9-OfNlrzB-xUKMF67V1GKlZaa7XFeHvrx=w1200';
+const luxuryRoom = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCY2TERZZUcWa7nYjOiKs-zh6GEqRsamQFAJakCqHYn_nJxLuFZEb7mcuOKTxLY8Uf6QsSHJwtGpL-IY2PtkuIQ31HEwRf44p7BvGFBrzz8e_wU025AEv9vCmMbgrBjz664-UXBT8q3k1p0YD3vaoBkdJNGhnZLuSHSlx7YBWkIWC3mRosPgxsW4WJS3oFJpP5tf_BrkQNUFC48iEJS90dmM54BoY9TVYBruBobWxlKnXUV57Fuu0rQ=w1200';
+const crewRoom = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCn65HZzUq0_AwPltT7zb0YdzMteIE5J-4WCVuNxSxIPDbAqFeX_RY8mY85mQFRX8_h6Oujmf4FAifm2ZTt35M9SMvfznVxGmyY4fhdJYbd9cldlpmcjKUUHzk7FH12nAqTYucKFEIUR6zz5NcRCMZoZi_4leAR9oU13GGV2U65BeJA7w3WJfC8Ebw-YKc1wzY7ZWZQqLj9RkR7RdTomoqUrgWZ4HZNbE9vTj71Wfzfxhd7inekgYGC=w1200';
+const ctaBg = 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80';
 
 const HotelAccommodation = () => {
   const breadcrumb = [
@@ -67,15 +67,7 @@ const HotelAccommodation = () => {
               <Button as={Link} to="/contact" variant="primary" size="lg">
                 Request Accommodation
               </Button>
-              <Button
-                as={Link}
-                to="/contact"
-                variant="outline"
-                size="lg"
-                className="border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10"
-              >
-                Contact Us
-              </Button>
+
             </div>
           </motion.div>
         </Container>
@@ -180,9 +172,9 @@ const HotelAccommodation = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                 {[
-                  { icon: Star,     label: '5-Star Hotels',         desc: 'Curated luxury and boutique hotel options worldwide.' },
-                  { icon: BedDouble, label: 'Suite Arrangements',   desc: 'Executive suites and connecting rooms for groups.' },
-                  { icon: Car,      label: 'Airport Transfers',      desc: 'Seamless transport between airport and hotel.' },
+                  { icon: Star, label: '5-Star Hotels', desc: 'Curated luxury and boutique hotel options worldwide.' },
+                  { icon: BedDouble, label: 'Suite Arrangements', desc: 'Executive suites and connecting rooms for groups.' },
+                  { icon: Car, label: 'Airport Transfers', desc: 'Seamless transport between airport and hotel.' },
                 ].map(({ icon: Icon, label, desc }) => (
                   <div key={label} className="flex flex-col items-start gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                     <div className="p-2 bg-primary/5 text-primary rounded-lg">
@@ -221,7 +213,7 @@ const HotelAccommodation = () => {
             >
               <div className="relative rounded-2xl overflow-hidden shadow-xl group">
                 <img
-                  src={luxuryRoom}
+                  src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85"
                   alt="Premium passenger hotel room"
                   className="w-full h-[420px] object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -282,9 +274,9 @@ const HotelAccommodation = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                 {[
-                  { icon: BedDouble, label: 'Rest-Compliant',       desc: 'Properties meeting ICAO and airline crew rest standards.' },
-                  { icon: Users,     label: 'Block Bookings',        desc: 'Rooming lists and group block reservations managed seamlessly.' },
-                  { icon: Coffee,    label: 'Full-Service Support',  desc: 'Meals, wake-up calls, and on-call assistance included.' },
+                  { icon: BedDouble, label: 'Rest-Compliant', desc: 'Properties meeting ICAO and airline crew rest standards.' },
+                  { icon: Users, label: 'Block Bookings', desc: 'Rooming lists and group block reservations managed seamlessly.' },
+                  { icon: Coffee, label: 'Full-Service Support', desc: 'Meals, wake-up calls, and on-call assistance included.' },
                 ].map(({ icon: Icon, label, desc }) => (
                   <div key={label} className="flex flex-col items-start gap-3 p-5 bg-light-gray rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                     <div className="p-2 bg-primary/5 text-primary rounded-lg">
@@ -373,15 +365,7 @@ const HotelAccommodation = () => {
               <Button as={Link} to="/contact" variant="gold" size="lg">
                 Request Accommodation
               </Button>
-              <Button
-                as={Link}
-                to="/contact"
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-primary"
-              >
-                Contact Us
-              </Button>
+
             </div>
           </motion.div>
         </Container>

@@ -16,7 +16,7 @@ import landingPermissionVisual from '../../assets/images/landing_permission_visu
 
 export const FlightPermits = () => {
   const breadcrumbItems = [
-    { label: 'Services', path: '#' },
+    { label: 'Services', path: '/contact' },
     { label: 'Flight Permits', path: '/flight-permits' }
   ];
 
@@ -31,9 +31,9 @@ export const FlightPermits = () => {
           <img
             src={flightPermitsHero}
             alt="Private Jet Flying"
-            className="w-full h-full object-cover opacity-40"
+            className="w-full h-full object-cover opacity-65"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
         </div>
 
@@ -58,12 +58,10 @@ export const FlightPermits = () => {
               <span className="text-accent-gold">Flight Permissions</span>
             </h1>
             <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
-              Professional worldwide overflight and landing permit coordination with fast response times and 24/7 operational support.
+              At AirZigzag Aviation Services, we deliver premium flight support solutions designed to keep your operations moving seamlessly across borders and airspace. From routine flights to urgent missions, our team coordinates every permit with precision, efficiency, and full regulatory compliance.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
-              <Button as={Link} to="/contact" variant="gold" size="lg">
-                Request Permit
-              </Button>
+
               <Button
                 as={Link}
                 to="/contact"
@@ -100,7 +98,7 @@ export const FlightPermits = () => {
                   Overflight Permits
                 </h2>
                 <p className="text-gray-500 mt-4 leading-relaxed">
-                  Avoid delays and airspace restrictions with our proactive flight planning. Our team manages diplomatic clearances and overflight authorizations across all global FIRs.
+                  When your route crosses foreign airspace, an overflight permit is essential. We manage the full process for commercial, private, cargo, charter, and special mission flights, tailoring each request to the aircraft type, routing, and operational requirements. Whether the flight is planned well in advance or requires urgent handling, we act promptly to obtain the necessary approvals.
                 </p>
               </div>
 
@@ -206,7 +204,7 @@ export const FlightPermits = () => {
                   </h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Secure airspace permissions for any routing. We coordinate directly with global Civil Aviation Authorities to secure prompt overflight authorizations, helping you avoid navigation delays and keep your flights on schedule.
+                  When your route crosses foreign airspace, an overflight permit is essential. We manage the full process for commercial, private, cargo, charter, and special mission flights, tailoring each request to the aircraft type, routing, and operational requirements. Whether the flight is planned well in advance or requires urgent handling, we act promptly to obtain the necessary approvals.
                 </p>
                 <ul className="space-y-3">
                   {['Diplomatic clearances', 'Block overflight permits', 'Urgent route alterations', 'Global FIR navigation'].map((item) => (
@@ -285,7 +283,7 @@ export const FlightPermits = () => {
                   </h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Simplify complex regulatory compliance. We provide full CAA coordination, ensuring every document, passenger manifest, and routing authorization meets all target country requirements.
+                  Flight clearance is the foundation of a smooth international operation. We coordinate the required approvals for your aircraft, route, schedule, and mission profile, ensuring all documentation is prepared accurately and submitted on time. Our team works closely with authorities and local partners to secure clearances efficiently and minimize delays.
                 </p>
                 <ul className="space-y-3">
                   {['Full regulatory compliance', 'Manifest coordination', 'Flight plan filing & ATC update', 'Short-notice permits support'].map((item) => (
@@ -318,11 +316,11 @@ export const FlightPermits = () => {
                     <ArrowDown className="h-6 w-6" />
                   </div>
                   <h3 className="text-3xl font-bold font-heading text-primary">
-                    Landing Permission
+                    Landing Permit
                   </h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Smooth arrival at any global FBO. We manage airport slots, coordinate prior permission required (PPR) clearances, and arrange parking logistics so that your plane secures arrival access at your target airport without delays.
+                  Landing permits require careful coordination and attention to detail. We manage the submission and follow-up process for arrivals into international destinations, ensuring all supporting information is complete and compliant. From passenger and cargo details to timing and airport requirements, we make sure every element is aligned for a smooth arrival.
                 </p>
                 <ul className="space-y-3">
                   {['Prior Permission Required (PPR)', 'Airport slot coordination', 'Ramp & aircraft parking slots', 'Night landing permissions'].map((item) => (
@@ -361,6 +359,25 @@ export const FlightPermits = () => {
               </motion.div>
             </div>
           </div>
+        </Container>
+      </section>
+      {/* Closing Tagline */}
+      <section className="py-16 bg-white border-t border-gray-100">
+        <Container className="max-w-3xl text-center">
+          <motion.div
+            variants={fadeUp()}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Every flight is unique, and our permit solutions are tailored to your specific operation. With 24/7 availability and worldwide coverage, AirZigzag Aviation Services provides the reliability, responsiveness, and expertise you need to stay on schedule.
+            </p>
+            <p className="text-primary font-bold text-lg tracking-tight">
+              AirZigzag Aviation Services — Your Reliable Partner for Flight Permits Worldwide.
+            </p>
+          </motion.div>
         </Container>
       </section>
     </Layout>

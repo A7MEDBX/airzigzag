@@ -103,7 +103,8 @@ export const Navbar = () => {
                       <ChevronDown className="h-4 w-4 transition-transform group-hover/dropdown:rotate-180" />
                     </button>
                     {/* Dropdown Menu */}
-                    <div className="absolute top-full left-0 mt-2 w-56 rounded-xl bg-primary border border-white/10 shadow-xl opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-200 transform translate-y-2 group-hover/dropdown:translate-y-0 overflow-hidden">
+                    <div className="absolute top-full left-0 pt-2 w-56 opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-200 transform translate-y-2 group-hover/dropdown:translate-y-0">
+                      <div className="rounded-xl bg-primary border border-white/10 shadow-xl overflow-hidden">
                       {link.dropdown.map((subLink) => (
                         <Link
                           key={subLink.name}
@@ -116,6 +117,7 @@ export const Navbar = () => {
                           {subLink.name}
                         </Link>
                       ))}
+                      </div>
                     </div>
                   </div>
                 );

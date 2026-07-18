@@ -6,16 +6,31 @@ import { Mail } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Layout from '../../components/layout/Layout';
 import Container from '../../components/common/Container/Container';
 import Button from '../../components/common/Button/Button';
 import { fadeUp } from '../../constants/animations';
 
 const contactFormSchema = z.object({
-  firstName: z.string().min(2, { message: 'First name must be at least 2 characters.' }),
-  lastName: z.string().min(2, { message: 'Last name must be at least 2 characters.' }),
-  email: z.string().email({ message: 'Please enter a valid email address.' }),
-  phone: z.string().min(5, { message: 'Please enter a valid phone number.' }),
+  firstName: z.string()
+    .min(1, { message: 'First name is required.' })
+    .min(2, { message: 'First name must be at least 2 characters.' })
+    .regex(/^[a-zA-Z\s-'\u00C0-\u00FF]+$/, { message: 'First name contains invalid characters.' }),
+  lastName: z.string()
+    .min(1, { message: 'Last name is required.' })
+    .min(2, { message: 'Last name must be at least 2 characters.' })
+    .regex(/^[a-zA-Z\s-'\u00C0-\u00FF]+$/, { message: 'Last name contains invalid characters.' }),
+  email: z.string()
+    .min(1, { message: 'Email address is required.' })
+    .email({ message: 'Please enter a valid email address.' }),
+  phone: z.string()
+    .min(1, { message: 'Phone number is required.' })
+    .min(5, { message: 'Phone number must be at least 5 characters.' })
+    .regex(/^[\d\s()+-.]+$/, { message: 'Please enter a valid phone number (digits, +, -, spaces only).' }),
+  message: z.string()
+    .min(1, { message: 'Message is required.' })
+    .min(10, { message: 'Please enter a message of at least 10 characters.' }),
 });
 
 export const Contact = () => {
@@ -30,12 +45,39 @@ export const Contact = () => {
 
   const onSubmit = async (data) => {
     try {
-      // Simulate API submit
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const { firstName, lastName, email, phone, message } = data;
+      const submissionTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
+
+      const payloadString = [
+        `First Name: ${firstName}`,
+        `Last Name: ${lastName}`,
+        `Email: ${email}`,
+        `Phone: ${phone}`,
+        `Submission Time: ${submissionTime} UTC`,
+        '',
+        'Message:',
+        message
+      ].join('\n');
+
+      console.log('Contact Form Submission:\n', payloadString);
+
+      // POST request to api endpoint
+      const apiUrl = import.meta.env.VITE_CONTACT_API_URL || 'http://localhost:5000/api/contact';
+      await axios.post(apiUrl, {
+        firstName,
+        lastName,
+        email,
+        phone,
+        message,
+        submissionTime,
+        formattedMessage: payloadString
+      });
+
       toast.success('Your message has been sent successfully. Our OCC team will reply shortly!');
       reset();
     } catch (error) {
-      toast.error('An error occurred. Please try again later.');
+      console.error('API submission error:', error);
+      toast.error('Failed to submit form. Please make sure the backend server is running on port 5000.');
     }
   };
 
@@ -83,13 +125,7 @@ export const Contact = () => {
               >
                 Send Inquiry
               </Button>
-              <Button 
-                as={Link} 
-                to="/services" 
-                className="px-8 py-3.5 border border-white/30 text-white bg-transparent font-semibold rounded hover:bg-white/10 transition-colors backdrop-blur-sm min-w-[160px]"
-              >
-                Our Services
-              </Button>
+
             </div>
           </motion.div>
         </Container>
@@ -173,6 +209,21 @@ export const Contact = () => {
                     />
                     {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone.message}</p>}
                   </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    rows={5}
+                    {...register('message')}
+                    className={`w-full px-4 py-3.5 rounded-lg border bg-gray-50/50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 transition-colors ${
+                      errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-gray-200 focus:ring-brand-gold/20 focus:border-brand-gold'
+                    }`}
+                    placeholder="Tell us about your flight support requirements..."
+                  />
+                  {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>}
                 </div>
                 
                 <div className="pt-4">

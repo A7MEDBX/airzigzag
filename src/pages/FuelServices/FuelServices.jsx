@@ -34,9 +34,9 @@ export const FuelServices = () => {
           <img
             src={groundHandlingHero}
             alt="Aircraft Refueling Tarmac"
-            className="w-full h-full object-cover opacity-45"
+            className="w-full h-full object-cover opacity-65"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
         </div>
 
@@ -63,9 +63,6 @@ export const FuelServices = () => {
               Worldwide aviation fuel support with Jet A1 and Avgas services, providing reliable fuel arrangements and operational assistance for aircraft operators.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
-              <Button as={Link} to="/contact" variant="gold" size="lg">
-                Request Quote
-              </Button>
               <Button
                 as={Link}
                 to="/contact"
@@ -295,47 +292,7 @@ export const FuelServices = () => {
       </section>
 
       {/* Bottom CTA Banner */}
-      <section className="relative py-24 bg-primary overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={groundHandlingHero}
-            alt="Aircraft fueling background visual"
-            className="w-full h-full object-cover opacity-20 filter blur-sm"
-          />
-          <div className="absolute inset-0 bg-primary/80" />
-        </div>
 
-        <Container className="relative z-10 max-w-4xl text-center">
-          <motion.div
-            variants={fadeUp()}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
-              Need Aviation Fuel Support?
-            </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Contact Air Zigzag to arrange worldwide aviation fuel services and operational assistance for your next flight.
-            </p>
-            <div className="flex gap-4 justify-center pt-4">
-              <Button as={Link} to="/contact" variant="gold" size="lg">
-                Request Quote
-              </Button>
-              <Button
-                as={Link}
-                to="/contact"
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-primary"
-              >
-                Contact Us
-              </Button>
-            </div>
-          </motion.div>
-        </Container>
-      </section>
     </Layout>
   );
 };

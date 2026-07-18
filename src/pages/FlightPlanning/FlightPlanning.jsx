@@ -13,58 +13,76 @@ import cockpitView from '../../assets/images/cockpit_view.png'; // Represents fl
 import wingView from '../../assets/images/wing_view.png'; // Represents weather / clouds flying
 import overflightVisual from '../../assets/images/overflight_visual.png';
 
-// Reusable SVG World Map with animated flight routes
-const SVGWorldMap = () => (
-  <svg viewBox="0 0 1000 500" className="w-full h-auto opacity-80" xmlns="http://www.w3.org/2000/svg">
-    {/* Simplified World Map Outlines */}
-    <path
-      d="M150,150 Q180,120 220,100 T300,120 T350,180 T300,250 T220,290 Z M450,100 Q500,80 550,110 T650,120 T720,100 T800,150 T850,220 T750,300 T600,320 T500,220 Z M200,320 Q250,350 220,420 T150,450 T120,400 Z M650,350 Q700,380 720,450 T680,480 T600,420 Z"
-      fill="#e2e8f0"
-      stroke="#cbd5e1"
-      strokeWidth="2"
-    />
-    {/* Glowing Major Hubs */}
-    <circle cx="250" cy="180" r="6" fill="#D4AF37" className="animate-ping" />
-    <circle cx="250" cy="180" r="4" fill="#D4AF37" />
-    
-    <circle cx="600" cy="160" r="6" fill="#D4AF37" className="animate-ping" />
-    <circle cx="600" cy="160" r="4" fill="#D4AF37" />
-    
-    <circle cx="750" cy="220" r="6" fill="#D4AF37" className="animate-ping" />
-    <circle cx="750" cy="220" r="4" fill="#D4AF37" />
 
-    {/* Animated Flight Path Curves */}
-    <motion.path
-      d="M250,180 Q425,100 600,160"
-      fill="none"
-      stroke="#D4AF37"
-      strokeWidth="2"
-      strokeDasharray="8 4"
-      initial={{ strokeDashoffset: 0 }}
-      animate={{ strokeDashoffset: -30 }}
-      transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-    />
-    <motion.path
-      d="M600,160 Q675,250 750,220"
-      fill="none"
-      stroke="#D4AF37"
-      strokeWidth="2"
-      strokeDasharray="8 4"
-      initial={{ strokeDashoffset: 0 }}
-      animate={{ strokeDashoffset: -30 }}
-      transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-    />
-    <motion.path
-      d="M250,180 Q500,300 750,220"
-      fill="none"
-      stroke="#D4AF37"
-      strokeWidth="1.5"
-      strokeDasharray="6 3"
-      initial={{ strokeDashoffset: 0 }}
-      animate={{ strokeDashoffset: 30 }}
-      transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
-    />
-  </svg>
+
+const SVGWorldMap = () => (
+  <div 
+    className="relative w-full aspect-video bg-cover bg-center rounded-xl overflow-hidden shadow-lg border border-gray-200"
+    style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkG3WtDIQWSXMbB-CHjqnQJCb7q8GTZOpfvx1RsUoV2Od9SQgcJEhEL0RZIYdrV9e-aYjFQ2m6CltYXAC2kET67iBuYSfvwNw8jsla8QYqVPjHfIk02FuOUAw3uarGl3jbqQXfT1YYJihUPmAGBvxy_pmHY71XJpfU3F51Da241Ylrjldl1hpnAyulagRa6NQioniF-wjLzMGJHwB1AU3MOIgVw6bw8gaq_-yR833J-fxsVy1SjNBa=w1200')" }}
+  >
+    {/* Subtle Dark blend overlay to help route line readability */}
+    <div className="absolute inset-0 bg-slate-950/40 rounded-xl" />
+    
+    {/* Grid Backdrop Mesh */}
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] opacity-60 rounded-xl" />
+    
+    {/* Radar sweep animation */}
+    <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl">
+      <motion.div 
+        animate={{ rotate: 360 }}
+        transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+        className="absolute top-1/2 left-1/2 w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 bg-[conic-gradient(from_0deg,rgba(212,175,55,0.08)_0deg,transparent_120deg,transparent_360deg)] origin-center"
+      />
+    </div>
+
+    <svg viewBox="0 0 1000 500" className="absolute inset-0 w-full h-full z-10" xmlns="http://www.w3.org/2000/svg">
+      {/* Defined Path for Plane Animation */}
+      <path
+        id="atlantic-route"
+        d="M240,180 Q370,80 500,120"
+        fill="none"
+        stroke="rgba(212, 175, 55, 0.3)"
+        strokeWidth="2"
+        strokeDasharray="6 4"
+      />
+
+      {/* Animated Glowing Flight Path Line Overlay */}
+      <motion.path
+        d="M240,180 Q370,80 500,120"
+        fill="none"
+        stroke="#D4AF37"
+        strokeWidth="2.5"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Glowing Hubs with Pulsating Rings */}
+      {/* North America (New York / JFK area) */}
+      <circle cx="240" cy="180" r="10" fill="rgba(212, 175, 55, 0.3)" className="animate-ping" style={{ transformOrigin: '240px 180px' }} />
+      <circle cx="240" cy="180" r="4.5" fill="#D4AF37" />
+      <text x="220" y="200" fill="#ffffff" fontSize="11" fontWeight="bold" fontFamily="sans-serif" className="drop-shadow-md">JFK</text>
+      
+      {/* Europe (London / LHR area) */}
+      <circle cx="500" cy="120" r="10" fill="rgba(212, 175, 55, 0.3)" className="animate-ping" style={{ transformOrigin: '500px 120px' }} />
+      <circle cx="500" cy="120" r="4.5" fill="#D4AF37" />
+      <text x="490" y="140" fill="#ffffff" fontSize="11" fontWeight="bold" fontFamily="sans-serif" className="drop-shadow-md">LHR</text>
+
+      {/* Animated Airplane Icon traveling en route */}
+      <g>
+        {/* Simple premium jet SVG icon */}
+        <path
+          d="M-6,-5 L8,0 L-6,5 L-3,0 Z"
+          fill="#D4AF37"
+          stroke="#081B3A"
+          strokeWidth="1"
+        />
+        <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#atlantic-route" />
+        </animateMotion>
+      </g>
+    </svg>
+  </div>
 );
 
 // Interactive Mock Dispatch Dashboard Component
@@ -157,9 +175,9 @@ export const FlightPlanning = () => {
           <img
             src={heroJetBg}
             alt="Airport Tarmac Ground Operations"
-            className="w-full h-full object-cover opacity-35"
+            className="w-full h-full object-cover opacity-65"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
         </div>
 
@@ -204,7 +222,7 @@ export const FlightPlanning = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="lg:col-span-5 bg-light-gray p-6 rounded-2xl border border-gray-200"
+              className="lg:col-span-5"
             >
               <SVGWorldMap />
             </motion.div>
@@ -224,8 +242,11 @@ export const FlightPlanning = () => {
                 Professional Flight Planning
               </h2>
               <p className="text-gray-500 leading-relaxed">
-                Effective flight planning saves valuable time and ensures operations run smoothly. Our professional services consider complex weather patterns, optimize route consumption, and utilize advanced international systems to significantly reduce potential delays and improve overall flight efficiency.
-              </p>
+Professional Flight Planning
+Precision Planning for Every Flight
+At Air Zigzag Flight Support, we provide professional flight planning services designed to ensure safe, efficient, and cost-effective operations for every mission.
+As a leading international trip planning and flight management company, we support aircraft operators worldwide with comprehensive flight planning, regulatory authorizations, and operational support tailored to their specific requirements.
+Our experienced dispatch team prepares every flight with precision, helping operators optimize performance while maintaining full compliance with international aviation regulations.              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 {['ATC flight filing', 'NOTAM alerts monitor', 'Optimized route coordinates', 'Overflight permissions integration'].map((check) => (
                   <div key={check} className="flex items-center gap-3 text-sm text-gray-600 font-medium">
@@ -270,8 +291,14 @@ export const FlightPlanning = () => {
                   </h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Avoid airspace congestion and reduce travel times. Our systems calculate optimal flight paths depending on airway structures, active NOTAMs, performance constraints, and ATC airspace structures, providing your crew with a smooth routing profile.
-                </p>
+Optimized Flight Routes
+Smart Routing for Maximum Efficiency
+
+Efficient flight planning begins with selecting the most suitable route.
+
+Our qualified dispatchers utilize internationally recognized flight planning systems to generate optimized flight routes based on aircraft performance, operational requirements, airspace availability, and flight restrictions.
+
+By carefully calculating the most efficient routing, we help reduce unnecessary flight time, optimize fuel consumption, minimize operational costs, and improve overall flight efficiency while ensuring safe and reliable operations.                </p>
                 <ul className="space-y-3">
                   {['Jetstream routing optimization', 'ATC system-ready routing', 'Airspace availability monitoring', 'Reduced en-route navigation fees'].map((item) => (
                     <li key={item} className="flex items-center gap-3 text-sm text-gray-600 font-medium">
@@ -340,8 +367,14 @@ export const FlightPlanning = () => {
                   </h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Fly around turbulence and adverse weather structures. We integrate real-time meteorological briefings, SIGMETs, wind velocities, and temperature forecasts into the flight planning algorithms, ensuring a comfortable flight profile for passengers and crew.
-                </p>
+Weather Consideration
+Accurate Weather Analysis for Safer Flights
+
+Weather forecasting is a fundamental part of every successful flight plan.
+
+Our planning process incorporates accurate meteorological data, including wind direction, headwinds, tailwinds, air temperature, and other weather conditions that directly affect aircraft performance and fuel consumption.
+
+By integrating real-time weather information into every flight plan, we ensure accurate fuel calculations, improved operational safety, and better decision-making throughout the entire flight.                </p>
                 <ul className="space-y-3">
                   {['Real-time weather radar briefing', 'Clear Air Turbulence (CAT) avoidance', 'Wind shear & icing analyses', 'Dynamic volcanic ash tracking'].map((item) => (
                     <li key={item} className="flex items-center gap-3 text-sm text-gray-600 font-medium">
@@ -377,8 +410,14 @@ export const FlightPlanning = () => {
                 Professional Flight Planning Process
               </h2>
               <p className="text-gray-500 leading-relaxed">
-                Qualified dispatchers prepare accurate plans using international systems, considering routing, weather, and timing to deliver safe flight guides for flight crews.
-              </p>
+Professional Flight Planning Process
+Comprehensive Planning from Departure to Arrival
+
+Our dispatch specialists combine advanced international flight planning systems with operational expertise to create customized flight plans that meet each operator's individual needs.
+
+We continuously monitor operational requirements and prepare efficient routing solutions designed to reduce ground delays and maximize flight performance.
+
+Operators may also nominate their preferred flight planning system whenever required, allowing us to integrate their preferred planning solution while maintaining the highest standards of operational accuracy, efficiency, and reliability.              </p>
             </motion.div>
 
             {/* Dashboard Visual */}
@@ -396,30 +435,7 @@ export const FlightPlanning = () => {
       </section>
 
       {/* Bottom CTA Banner (Deleted Contact Us Button) */}
-      <section className="py-20 bg-primary text-white text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_100%,transparent_100%)] opacity-30" />
-        <Container className="relative z-10 max-w-3xl">
-          <motion.div
-            variants={fadeUp()}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-              Ready to Plan Your Next Flight?
-            </h2>
-            <p className="text-gray-300 text-lg max-w-xl mx-auto">
-              Partner with Air Zigzag for professional flight planning services tailored to your upcoming operation.
-            </p>
-            <div className="pt-4">
-              <Button as={Link} to="/contact" variant="gold" size="lg">
-                Request Flight Planning
-              </Button>
-            </div>
-          </motion.div>
-        </Container>
-      </section>
+
     </Layout>
   );
 };

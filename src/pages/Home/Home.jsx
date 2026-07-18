@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Fuel, Users, Clock, Globe, ArrowRight, Play } from 'lucide-react';
 import Layout from '../../components/layout/Layout';
@@ -12,6 +12,45 @@ import { fadeUp, fadeInLeft, fadeInRight, staggerContainer } from '../../constan
 
 import heroJetBg from '../../assets/images/hero_jet_bg.png';
 import cockpitView from '../../assets/images/cockpit_view.png';
+
+// Reusable animated count-up component
+const AnimatedCounter = ({ value, suffix = "" }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (isInView) {
+      let start = 0;
+      const end = parseInt(value, 10);
+      if (start === end) return;
+
+      const duration = 2; // seconds
+      const totalMiliseconds = duration * 1000;
+      const frameRate = 1000 / 60; // 60fps
+      const totalFrames = Math.round(totalMiliseconds / frameRate);
+      let frame = 0;
+
+      const timer = setInterval(() => {
+        frame++;
+        const progress = frame / totalFrames;
+        const easeOutQuad = progress * (2 - progress);
+        const currentCount = Math.round(easeOutQuad * end);
+
+        setCount(currentCount);
+
+        if (frame === totalFrames) {
+          clearInterval(timer);
+          setCount(end);
+        }
+      }, frameRate);
+
+      return () => clearInterval(timer);
+    }
+  }, [isInView, value]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+};
 
 export const Home = () => {
   return (
@@ -26,10 +65,10 @@ export const Home = () => {
           <img
             src={heroJetBg}
             alt="Private Jet on Runway"
-            className="w-full h-full object-cover opacity-45"
+            className="w-full h-full object-cover opacity-65"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
         </div>
 
         <Container className="relative z-10 py-16 md:py-24">
@@ -247,80 +286,109 @@ export const Home = () => {
         </Container>
       </section>
 
-      {/* Stats Footprint Banner */}
-      <section className="py-16 bg-primary text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_100%,transparent_100%)] opacity-30" />
+      {/* Global Reach / Stats Footprint Banner */}
+      <section className="py-24 bg-[#0B1D3A] text-white relative overflow-hidden">
+
         <Container className="relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white font-heading mb-4 tracking-tight">
+              A Truly Global Footprint
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Operating across 6 continents with local expertise that understands the nuances of regional aviation regulations.
+            </p>
+          </div>
+
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div>
-              <h4 className="text-3xl md:text-5xl font-extrabold text-accent-gold tracking-tight mb-2">
-                5000+
-              </h4>
-              <p className="text-xs md:text-sm uppercase tracking-wider text-gray-300 font-bold">
+              <div className="text-4xl md:text-[56px] font-extrabold text-accent-gold mb-2 font-heading tracking-tight">
+                <AnimatedCounter value="5000" suffix="+" />
+              </div>
+              <div className="text-gray-300 text-xs md:text-sm uppercase tracking-wider font-bold">
                 Permits Per Year
-              </p>
+              </div>
             </div>
             <div>
-              <h4 className="text-3xl md:text-5xl font-extrabold text-accent-gold tracking-tight mb-2">
-                15+
-              </h4>
-              <p className="text-xs md:text-sm uppercase tracking-wider text-gray-300 font-bold">
-                Years In Service
-              </p>
+              <div className="text-4xl md:text-[56px] font-extrabold text-accent-gold mb-2 font-heading tracking-tight">
+                <AnimatedCounter value="15" suffix="+" />
+              </div>
+              <div className="text-gray-300 text-xs md:text-sm uppercase tracking-wider font-bold">
+                Years of Service
+              </div>
             </div>
             <div>
-              <h4 className="text-3xl md:text-5xl font-extrabold text-accent-gold tracking-tight mb-2">
-                20+
-              </h4>
-              <p className="text-xs md:text-sm uppercase tracking-wider text-gray-300 font-bold">
+              <div className="text-4xl md:text-[56px] font-extrabold text-accent-gold mb-2 font-heading tracking-tight">
+                <AnimatedCounter value="20" suffix="+" />
+              </div>
+              <div className="text-gray-300 text-xs md:text-sm uppercase tracking-wider font-bold">
                 Global Offices
-              </p>
+              </div>
             </div>
             <div>
-              <h4 className="text-3xl md:text-5xl font-extrabold text-accent-gold tracking-tight mb-2">
-                24
-              </h4>
-              <p className="text-xs md:text-sm uppercase tracking-wider text-gray-300 font-bold">
+              <div className="text-4xl md:text-[56px] font-extrabold text-accent-gold mb-2 font-heading tracking-tight">
+                <AnimatedCounter value="24" />
+              </div>
+              <div className="text-gray-300 text-xs md:text-sm uppercase tracking-wider font-bold">
                 Hour Support
-              </p>
+              </div>
             </div>
           </div>
         </Container>
+
+
       </section>
 
       {/* Trust & payment badges */}
-      <section className="py-16 bg-white border-b border-gray-100">
-        <Container className="max-w-4xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="py-24 bg-[#f5f3f6]">
+        <Container className="max-w-5xl">
+          <div className="bg-white rounded-3xl p-12 md:p-16 shadow-lg border border-gray-100">
             {/* Accepted Payments */}
-            <div className="space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400">
+            <div className="mb-12">
+              <h3 className="text-xl md:text-2xl font-bold font-heading text-primary text-center mb-10">
                 Accepted Payment Methods
-              </h4>
-              <div className="flex flex-wrap gap-6 items-center justify-center md:justify-start">
-                <span className="text-xl font-extrabold tracking-tight text-gray-400 italic font-heading">VISA</span>
-                <span className="text-xl font-bold tracking-tight text-gray-400 font-heading">mastercard</span>
-                <span className="text-xl font-bold italic tracking-tight text-gray-400 font-heading">PayPal</span>
+              </h3>
+              <div className="flex flex-wrap justify-center gap-12 items-center">
+                <div className="flex flex-col items-center gap-3 transition-transform duration-300 hover:scale-105">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2014_logo_detail.svg" className="h-8 object-contain" alt="Visa" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Visa</span>
+                </div>
+                <div className="flex flex-col items-center gap-3 transition-transform duration-300 hover:scale-105">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" className="h-10 object-contain" alt="Mastercard" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Mastercard</span>
+                </div>
+                <div className="flex flex-col items-center gap-3 transition-transform duration-300 hover:scale-105">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" className="h-8 object-contain" alt="PayPal" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">PayPal</span>
+                </div>
               </div>
             </div>
 
-            {/* Trusted Associations */}
-            <div className="space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400">
+            <div className="border-t border-gray-100 my-12" />
+
+            {/* Trusted Aviation Associations */}
+            <div>
+              <h3 className="text-xl md:text-2xl font-bold font-heading text-primary text-center mb-10">
                 Trusted Aviation Associations
-              </h4>
-              <div className="flex flex-wrap gap-6 items-center justify-center md:justify-end">
-                <span className="px-3 py-1.5 border-2 border-gray-200 text-xs font-bold text-gray-400 uppercase tracking-widest rounded">EBAA</span>
-                <span className="px-3 py-1.5 border-2 border-gray-200 text-xs font-bold text-gray-400 uppercase tracking-widest rounded">NBAA</span>
-                <span className="px-3 py-1.5 border-2 border-gray-200 text-xs font-bold text-gray-400 uppercase tracking-widest rounded">IBAC</span>
+              </h3>
+              <div className="flex flex-wrap justify-center items-center gap-12">
+                <div className="flex flex-col items-center transition-transform duration-300 hover:scale-105 cursor-pointer">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/IATA_logo.svg" className="h-12 object-contain grayscale hover:grayscale-0 transition-all duration-300" alt="IATA Ground Handling Partner" />
+                </div>
+                <div className="flex flex-col items-center transition-transform duration-300 hover:scale-105 cursor-pointer">
+                  <img src="https://logo.clearbit.com/nbaa.org" className="h-10 object-contain grayscale hover:grayscale-0 transition-all duration-300" alt="NBAA" />
+                </div>
+                <div className="flex flex-col items-center transition-transform duration-300 hover:scale-105 cursor-pointer">
+                  <img src="https://logo.clearbit.com/ebaa.org" className="h-10 object-contain grayscale hover:grayscale-0 transition-all duration-300" alt="EBAA" />
+                </div>
+                <div className="flex flex-col items-center transition-transform duration-300 hover:scale-105 cursor-pointer">
+                  <img src="https://logo.clearbit.com/afbaa.org" className="h-12 object-contain grayscale hover:grayscale-0 transition-all duration-300" alt="AfBAA" />
+                </div>
               </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* CTA section */}
-      <CTA />
     </Layout>
   );
 };

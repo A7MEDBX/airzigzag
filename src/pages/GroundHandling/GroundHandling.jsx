@@ -32,9 +32,9 @@ export const GroundHandling = () => {
           <img
             src={groundHandlingHero}
             alt="Aircraft Ground Handling Tarmac"
-            className="w-full h-full object-cover opacity-45"
+            className="w-full h-full object-cover opacity-65"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
         </div>
 
@@ -154,8 +154,7 @@ export const GroundHandling = () => {
                   </h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Experience seamless FBO terminal navigation. Our dedicated passenger care team arranges premium terminal access, handles baggage transfer, and coordinates customs clearance, delivering an effortless travel flow.
-                </p>
+Delivering a seamless passenger experience through professional meet-and-greet services, dedicated VIP lounge coordination, fast-track Customs, Immigration & Quarantine (CIQ) assistance, baggage support, and personalized care for passengers, crew members, and executive travelers from arrival to departure.                </p>
                 <ul className="space-y-3">
                   {['VIP Lounge access & concierge', 'Fast-track Customs & Immigration (CIQ)', 'Dedicated meet and greet staff', 'Crew terminal assistance'].map((item) => (
                     <li key={item} className="flex items-center gap-3 text-sm text-gray-600 font-medium">
@@ -224,8 +223,7 @@ export const GroundHandling = () => {
                   </h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Maximize safety on the tarmac. Our pre-vetted ramp agents handle pushbacks, towings, marshalling signals, and aircraft parking logistics according to strict international handling protocols.
-                </p>
+Providing complete ramp handling operations including aircraft marshalling, parking coordination, pushback, towing, aircraft positioning, turnaround supervision, and close coordination with airport authorities to ensure safe, efficient, and on-time ground operations.                </p>
                 <ul className="space-y-3">
                   {['Professional marshalling & guidance', 'Secure parking & tie-down', 'Pushback & aircraft towing', 'Wheel chocks & gear pins installation'].map((item) => (
                     <li key={item} className="flex items-center gap-3 text-sm text-gray-600 font-medium">
@@ -258,8 +256,7 @@ export const GroundHandling = () => {
                   </h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Keep your aircraft systems running efficiently. We manage vital ground supply units, power systems, starter setups, air conditioning units, and cabin utility replenishments during transit.
-                </p>
+Coordinating a full range of Ground Support Equipment (GSE), including Ground Power Units (GPU), Air Starter Units (ASU), Air Conditioning Units (ACU), potable water supply, lavatory servicing, aircraft stairs, and additional equipment required for efficient aircraft servicing.                </p>
                 <ul className="space-y-3">
                   {['Ground Power Units (GPU)', 'Air Starter Units (ASU)', 'Cabin utility replenishment', 'Potable water & lavatory servicing'].map((item) => (
                     <li key={item} className="flex items-center gap-3 text-sm text-gray-600 font-medium">
@@ -328,8 +325,7 @@ export const GroundHandling = () => {
                   </h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed">
-                  Fast and secure cargo routing. Our team supervises the loading of fragile baggage, handles dangerous goods paperwork, and manages cargo customs clearances to guarantee swift turnarounds.
-                </p>
+Managing cargo and baggage operations with precision, including loading and unloading coordination, secure baggage handling, cargo logistics support, weight distribution assistance, and close collaboration with airport handling teams to ensure safe and timely operations.                </p>
                 <ul className="space-y-3">
                   {['Secure luggage loading & sorting', 'Cargo customs clearance support', 'Dangerous goods (DGR) handling paperwork', 'Expedited cargo terminal access'].map((item) => (
                     <li key={item} className="flex items-center gap-3 text-sm text-gray-600 font-medium">
@@ -347,36 +343,7 @@ export const GroundHandling = () => {
       </section>
 
       {/* Need Ground Handling Support Section (Mockup bottom banner) */}
-      <section className="relative py-24 bg-primary overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={groundHandlingHero}
-            alt="FBO Lounge background visual"
-            className="w-full h-full object-cover opacity-20 filter blur-sm"
-          />
-          <div className="absolute inset-0 bg-primary/80" />
-        </div>
 
-        <Container className="relative z-10 max-w-4xl text-center">
-          <motion.div
-            variants={fadeUp()}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
-              Need Ground Handling Support?
-            </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-              Our operations team coordinates professional ground handling services for aircraft, crew, and passengers worldwide.
-            </p>
-            <Button as={Link} to="/contact" variant="gold" size="lg" className="mt-4">
-              Contact Operations Team
-            </Button>
-          </motion.div>
-        </Container>
-      </section>
     </Layout>
   );
 };

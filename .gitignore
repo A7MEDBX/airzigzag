@@ -45,13 +45,13 @@ lerna-debug.log*
 
 # Vite cache
 .vite/
-
+stitch*
 # ===========================
 # Testing
 # ===========================
 coverage/
 *.lcov
-.nyc_output
+.
 
 # ===========================
 # Editor directories and files

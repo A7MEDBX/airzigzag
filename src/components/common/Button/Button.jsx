@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export const Button = ({
   children,
@@ -13,6 +14,9 @@ export const Button = ({
   loading = false,
   icon: Icon,
   iconPosition = 'right',
+  as,
+  to,
+  href,
   ...props
 }) => {
   const baseStyles = 'inline-flex items-center justify-center font-heading font-semibold rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
@@ -44,13 +48,44 @@ export const Button = ({
     </>
   );
 
+  const classes = clsx(baseStyles, variants[variant], sizes[size], className);
+
+  // If a router link is desired
+  if (to || as === Link) {
+    const MotionLink = motion(Link);
+    return (
+      <MotionLink
+        whileTap={{ scale: 0.98 }}
+        to={to}
+        className={classes}
+        {...props}
+      >
+        {buttonContent}
+      </MotionLink>
+    );
+  }
+
+  // If an external link/anchor is desired
+  if (href || as === 'a') {
+    return (
+      <motion.a
+        whileTap={{ scale: 0.98 }}
+        href={href}
+        className={classes}
+        {...props}
+      >
+        {buttonContent}
+      </motion.a>
+    );
+  }
+
   return (
     <motion.button
       whileTap={{ scale: 0.98 }}
       type={type}
       onClick={onClick}
       disabled={disabled || loading}
-      className={clsx(baseStyles, variants[variant], sizes[size], className)}
+      className={classes}
       {...props}
     >
       {buttonContent}

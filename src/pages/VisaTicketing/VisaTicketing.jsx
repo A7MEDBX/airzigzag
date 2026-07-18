@@ -1,111 +1,129 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FileText, Ticket, Luggage, Headset } from 'lucide-react';
+import { FileText, Ticket, Luggage, Headphones } from 'lucide-react';
 import Layout from '../../components/layout/Layout';
 import Container from '../../components/common/Container/Container';
 import Button from '../../components/common/Button/Button';
-import { fadeUp } from '../../constants/animations';
+import Card from '../../components/common/Card/Card';
+import { fadeUp, fadeInLeft, fadeInRight } from '../../constants/animations';
 
-const VisaTicketing = () => {
+export const VisaTicketing = () => {
   return (
     <Layout
-      title="Entry Visa & Ticketing | Air Zigzag"
-      description="Visa assistance and ticketing support to help passengers complete travel procedures efficiently."
+      title="Entry Visa & Ticketing Assistance - Air Zigzag"
+      description="Visa assistance and ticketing support to help passengers complete travel procedures efficiently and reduce delays."
     >
-      {/* Hero Section */}
-      <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden pt-20 md:pt-[104px]">
+      {/* Page Hero Section */}
+      <section className="relative min-h-[60vh] flex items-center bg-primary overflow-hidden pt-28 pb-20">
         <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center" 
-            style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCA-j43TbgZF9uE93tnLcDJeEfaFMvaqFo0tBO10uN3HT92CPG6xJFwlYvNuJLZToWzXl1CFDCoNNFUzdtaRCt7eWtDa4wLm3tFU579Rse9YurqPEvcD5n0gPgp6HIJWoT_9nHI2RAvxE02rs2KRJDrdNeannIZKNT59eQ40swC61K1uiL7g16nMVGi7B5DYV6S0aepQfQdF1FvTQJUgNezyHGRLa0GELBHlO84vhxD9mqaHijdJhwW')" }}
-          ></div>
-          <div className="absolute inset-0 bg-primary-container/70 mix-blend-multiply"></div>
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA-j43TbgZF9uE93tnLcDJeEfaFMvaqFo0tBO10uN3HT92CPG6xJFwlYvNuJLZToWzXl1CFDCoNNFUzdtaRCt7eWtDa4wLm3tFU579Rse9YurqPEvcD5n0gPgp6HIJWoT_9nHI2RAvxE02rs2KRJDrdNeannIZKNT59eQ40swC61K1uiL7g16nMVGi7B5DYV6S0aepQfQdF1FvTQJUgNezyHGRLa0GELBHlO84vhxD9mqaHijdJhwW"
+            alt="Aircraft Ground Handling Tarmac"
+            className="w-full h-full object-cover opacity-65"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
         </div>
-        
-        <Container className="relative z-10 text-center">
+
+        <Container className="relative z-10 text-left">
           <motion.div
             variants={fadeUp()}
             initial="hidden"
             animate="visible"
+            className="max-w-3xl space-y-6"
           >
-            <h1 className="font-display-lg text-display-lg text-on-primary mb-6 drop-shadow-lg">
-              Entry Visa & Ticketing
+            {/* Breadcrumb Path */}
+            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gray-300">
+              <Link to="/" className="hover:text-accent-gold transition-colors">Home</Link>
+              <span>•</span>
+              <span className="text-gray-400">Services</span>
+              <span>•</span>
+              <span className="text-accent-gold">Visa & Ticketing</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight font-heading">
+              Entry Visa & <br />
+              <span className="text-accent-gold">Ticketing</span>
             </h1>
-            <p className="font-body-lg text-body-lg text-on-primary/90 max-w-2xl mx-auto mb-8 drop-shadow-md">
+            <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
               Visa assistance and ticketing support to help passengers complete travel procedures efficiently.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button as={Link} to="/contact" className="px-6 py-3 bg-primary-container text-on-primary font-label-bold text-label-bold rounded hover:opacity-90 transition-opacity border-none inline-flex justify-center items-center w-full sm:w-auto shadow-md">
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Button as={Link} to="/contact" variant="gold" size="lg">
                 Request Assistance
               </Button>
-              <Button as={Link} to="/contact" className="px-6 py-3 bg-transparent text-[#D4AF37] border-[1.5px] border-[#D4AF37] font-label-bold text-label-bold rounded hover:bg-[#D4AF37]/10 transition-colors inline-flex justify-center items-center w-full sm:w-auto">
-                Contact Us
-              </Button>
+
             </div>
           </motion.div>
         </Container>
       </section>
 
       {/* Introduction Section */}
-      <section className="py-section-gap bg-background">
+      <section className="py-20 md:py-28 bg-background">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left: Image Grid */}
             <div className="order-2 lg:order-1 relative h-[600px] grid grid-rows-2 gap-4">
-              <motion.div 
-                variants={fadeUp()}
+              <motion.div
+                variants={fadeUp(0.1)}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="relative rounded-lg overflow-hidden shadow-sm h-full"
+                className="relative rounded-xl overflow-hidden shadow-md h-full"
               >
-                <img 
-                  className="absolute inset-0 w-full h-full object-cover" 
-                  alt="A professional concierge at a premium airport desk assisting a traveler with their passport and documents in a highly polished, softly lit environment." 
+                <img
+                  className="absolute inset-0 w-full h-full object-cover"
+                  alt="A professional concierge at a premium airport desk assisting a traveler"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA-j43TbgZF9uE93tnLcDJeEfaFMvaqFo0tBO10uN3HT92CPG6xJFwlYvNuJLZToWzXl1CFDCoNNFUzdtaRCt7eWtDa4wLm3tFU579Rse9YurqPEvcD5n0gPgp6HIJWoT_9nHI2RAvxE02rs2KRJDrdNeannIZKNT59eQ40swC61K1uiL7g16nMVGi7B5DYV6S0aepQfQdF1FvTQJUgNezyHGRLa0GELBHlO84vhxD9mqaHijdJhwW"
                 />
               </motion.div>
               <div className="grid grid-cols-2 gap-4 h-full">
-                <motion.div 
-                  variants={fadeUp(0.1)}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="relative rounded-lg overflow-hidden shadow-sm"
-                >
-                  <img 
-                    className="absolute inset-0 w-full h-full object-cover" 
-                    alt="A close-up of a premium airline boarding pass resting on a polished wooden surface beside a sleek pen and a luxury passport cover, illuminated by natural light." 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4meIr3uP0y1mqUDCOAEZIBzmgai5lOJROfGZ86iFffdOcY2YApOso7Opwin2441-Bul54VS4g6eppWQSO9T7ACAB5z-EwIrWhEtRZvPBu_xf6Gu3lvc8grzgxIlYrqfg-FLsmsQuo5-6LTrv1-g5qgg3qEGAgJ2IsfRTQPDzRXHA457fkYk4fkikmLykMJEaIvLKOcK8fOGCTvj551uLEcv_kOGWGtsrmF6xlF_ZyntQ0STJianvs"
-                  />
-                </motion.div>
-                <motion.div 
+                <motion.div
                   variants={fadeUp(0.2)}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  className="relative rounded-lg overflow-hidden shadow-sm"
+                  className="relative rounded-xl overflow-hidden shadow-md h-full"
                 >
-                  <img 
-                    className="absolute inset-0 w-full h-full object-cover" 
-                    alt="A stylized composition featuring an open passport, a model airplane, and a leather luggage tag on a light wooden desk, evoking the excitement and preparation of international travel." 
+                  <img
+                    className="absolute inset-0 w-full h-full object-cover"
+                    alt="Premium airline boarding pass resting on a polished wooden surface"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4meIr3uP0y1mqUDCOAEZIBzmgai5lOJROfGZ86iFffdOcY2YApOso7Opwin2441-Bul54VS4g6eppWQSO9T7ACAB5z-EwIrWhEtRZvPBu_xf6Gu3lvc8grzgxIlYrqfg-FLsmsQuo5-6LTrv1-g5qgg3qEGAgJ2IsfRTQPDzRXHA457fkYk4fkikmLykMJEaIvLKOcK8fOGCTvj551uLEcv_kOGWGtsrmF6xlF_ZyntQ0STJianvs"
+                  />
+                </motion.div>
+                <motion.div
+                  variants={fadeUp(0.3)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="relative rounded-xl overflow-hidden shadow-md h-full"
+                >
+                  <img
+                    className="absolute inset-0 w-full h-full object-cover"
+                    alt="Open passport and travel essentials on a light wooden desk"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5-hGhgPiuh1OYqjx9PbD8j9gjBX3cbeY6T5droDfV4xBKJTVzDqXMv6bXgJilC3CWmjAGjP2hgnL0Co53qBc7rtyuIhLHOWVkkZr6SKvrkZahGhK5Vsml-3sj0KGAoJVf12jCTelBY5S_3E6Fj5gVDk4XKURiMzd-Z6B_Xt0gL1SHDvCZSTIhinteU71GHWWP1rmMuVesd31gj8pVQzbOo1wooj6SiQ844K5ISvwo72DJSwEZDxcH"
                   />
                 </motion.div>
               </div>
             </div>
-            
-            <motion.div 
-              variants={fadeUp()}
+
+            {/* Right: Text Block */}
+            <motion.div
+              variants={fadeInLeft(0.1)}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="order-1 lg:order-2 space-y-6"
+              className="order-1 lg:order-2 space-y-6 text-left lg:pl-8"
             >
-              <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary-container">
+              <span className="text-accent-gold font-bold uppercase tracking-widest text-xs block">
+                Passenger Support
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-primary mb-6 leading-tight">
                 Comprehensive Travel Support
               </h2>
-              <p className="font-body-md text-body-md text-on-surface-variant">
+              <div className="w-16 h-1 bg-accent-gold mb-8" />
+              <p className="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
                 Assistance with entry visas. Ticketing assistance. Helping customers complete travel procedures. Reducing unnecessary delays during travel preparation.
               </p>
             </motion.div>
@@ -113,152 +131,143 @@ const VisaTicketing = () => {
         </Container>
       </section>
 
-      {/* Service Features (Bento Grid) */}
-      <section className="bg-surface-container-low py-section-gap">
+      {/* Grid Overview Section */}
+      <section className="bg-white py-20 md:py-28">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
-            <motion.div 
-              variants={fadeUp()}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="bg-surface rounded-xl p-6 shadow-sm border border-outline-variant/10 hover:shadow-md transition-shadow flex flex-col items-start group"
-            >
-              <div className="w-12 h-12 rounded-full bg-primary-fixed/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <FileText className="text-primary-container w-6 h-6" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Card 1 */}
+            <Card hoverEffect animate={false} className="bg-light-gray p-6 text-left border-0">
+              <div className="p-3 bg-primary/5 text-primary rounded-lg w-fit mb-5">
+                <FileText className="h-6 w-6" />
               </div>
-              <h3 className="font-headline-md text-headline-md text-primary-container mb-3">Visa Assistance</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant mt-auto">Support with entry visa arrangements.</p>
-            </motion.div>
-            
-            <motion.div 
-              variants={fadeUp(0.1)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="bg-surface rounded-xl p-6 shadow-sm border border-outline-variant/10 hover:shadow-md transition-shadow flex flex-col items-start group"
-            >
-              <div className="w-12 h-12 rounded-full bg-primary-fixed/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Ticket className="text-primary-container w-6 h-6" />
+              <h3 className="text-lg font-bold text-primary font-heading mb-2">Visa Assistance</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Support with entry visa arrangements.
+              </p>
+            </Card>
+
+            {/* Card 2 */}
+            <Card hoverEffect animate={false} className="bg-light-gray p-6 text-left border-0">
+              <div className="p-3 bg-primary/5 text-primary rounded-lg w-fit mb-5">
+                <Ticket className="h-6 w-6" />
               </div>
-              <h3 className="font-headline-md text-headline-md text-primary-container mb-3">Ticketing Assistance</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant mt-auto">Assistance with travel ticketing.</p>
-            </motion.div>
-            
-            <motion.div 
-              variants={fadeUp(0.2)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="bg-surface rounded-xl p-6 shadow-sm border border-outline-variant/10 hover:shadow-md transition-shadow flex flex-col items-start group"
-            >
-              <div className="w-12 h-12 rounded-full bg-primary-fixed/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Luggage className="text-primary-container w-6 h-6" />
+              <h3 className="text-lg font-bold text-primary font-heading mb-2">Ticketing Assistance</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Assistance with travel ticketing.
+              </p>
+            </Card>
+
+            {/* Card 3 */}
+            <Card hoverEffect animate={false} className="bg-light-gray p-6 text-left border-0">
+              <div className="p-3 bg-primary/5 text-primary rounded-lg w-fit mb-5">
+                <Luggage className="h-6 w-6" />
               </div>
-              <h3 className="font-headline-md text-headline-md text-primary-container mb-3">Travel Preparation</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant mt-auto">Helping simplify travel procedures.</p>
-            </motion.div>
-            
-            <motion.div 
-              variants={fadeUp(0.3)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="bg-surface rounded-xl p-6 shadow-sm border border-outline-variant/10 hover:shadow-md transition-shadow flex flex-col items-start group"
-            >
-              <div className="w-12 h-12 rounded-full bg-primary-fixed/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Headset className="text-primary-container w-6 h-6" />
+              <h3 className="text-lg font-bold text-primary font-heading mb-2">Travel Preparation</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Helping simplify travel procedures.
+              </p>
+            </Card>
+
+            {/* Card 4 */}
+            <Card hoverEffect animate={false} className="bg-light-gray p-6 text-left border-0">
+              <div className="p-3 bg-primary/5 text-primary rounded-lg w-fit mb-5">
+                <Headphones className="h-6 w-6" />
               </div>
-              <h3 className="font-headline-md text-headline-md text-primary-container mb-3">Customer Support</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant mt-auto">Providing assistance throughout the preparation process.</p>
-            </motion.div>
+              <h3 className="text-lg font-bold text-primary font-heading mb-2">Customer Support</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Providing assistance throughout the preparation process.
+              </p>
+            </Card>
           </div>
         </Container>
       </section>
 
       {/* Image Gallery Section */}
-      <section className="py-section-gap bg-background overflow-hidden">
+      <section className="py-20 md:py-28 bg-background overflow-hidden">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter h-[400px]">
-            <motion.div 
-              variants={fadeUp()}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="relative rounded-xl overflow-hidden shadow-sm group"
-            >
-              <img 
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                alt="A pristine British passport resting on top of a flight itinerary on a wooden table, capturing the essence of global travel and administrative precision." 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSs3tfpO31ID8v5Naa5WT9Y2JrL5ORHDm2NDG8IpNI7m52LDdcsXr8DxxUcWNQ9QQp9xB4pZqx3WJMDIvssWO_oNSIFkaE5fiGOGJVuWp0_Wo_2vYg1r3g4ZUGD8I11nb9XxE-XIGT3Yf2nkoc4f_tHEiVrs9SWjbTcgCI2QzrBAUjn6bLPI2X8ryqgcvdJTIfkPrMwgYWjxB2-pvsQuCjqxIernEZgGRDwjdsBIJo04zDEuxeILSL"
-              />
-              <div className="absolute inset-0 bg-primary-container/10 group-hover:bg-transparent transition-colors duration-500"></div>
-            </motion.div>
-            
-            <motion.div 
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-auto md:h-[400px]">
+            {/* Image 1 */}
+            <motion.div
               variants={fadeUp(0.1)}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="relative rounded-xl overflow-hidden shadow-sm group"
+              className="relative rounded-2xl overflow-hidden shadow-md group h-[300px] md:h-full"
             >
-              <img 
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                alt="A close-up shot of an exclusive boarding pass on a sleek terminal desk with a luxury watch and pen, representing meticulous ticketing and premium service." 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4meIr3uP0y1mqUDCOAEZIBzmgai5lOJROfGZ86iFffdOcY2YApOso7Opwin2441-Bul54VS4g6eppWQSO9T7ACAB5z-EwIrWhEtRZvPBu_xf6Gu3lvc8grzgxIlYrqfg-FLsmsQuo5-6LTrv1-g5qgg3qEGAgJ2IsfRTQPDzRXHA457fkYk4fkikmLykMJEaIvLKOcK8fOGCTvj551uLEcv_kOGWGtsrmF6xlF_ZyntQ0STJianvs"
+              <img
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                alt="A premium boarding pass and passport resting in an airport lounge"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC103JPUvvFMHnsmstGxv1wVD64yHb5IQPBw7SnV80cA1-ejPwnh44CcOOd7A7NFpGjZCUe-V5iSKRUGoHu0IsZTRLwTq2zGwUNi6wIo0q4F7xlZrT2yhCwW4wnZXmGGEuXps5ZdylFShFsCClXlQVvCn8ENRTIMo7ztIgKGgUujcwznz8zgjfH1CA9JlccGCzOy-WTa9mYD7hTu1TVkkjIvNyfnGruGlYO_CWTk_zIA0xmXCFMLjmxT0yall0M75p7Sc1V1JSaH9o"
               />
-              <div className="absolute inset-0 bg-primary-container/10 group-hover:bg-transparent transition-colors duration-500"></div>
+              <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500" />
             </motion.div>
-            
-            <motion.div 
+
+            {/* Image 2 */}
+            <motion.div
               variants={fadeUp(0.2)}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="relative rounded-xl overflow-hidden shadow-sm group"
+              className="relative rounded-2xl overflow-hidden shadow-md group h-[300px] md:h-full"
             >
-              <img 
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                alt="A curated arrangement of travel essentials including a passport, leather luggage tag, and a miniature airplane model on a clean desk, highlighting thorough travel preparation." 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5-hGhgPiuh1OYqjx9PbD8j9gjBX3cbeY6T5droDfV4xBKJTVzDqXMv6bXgJilC3CWmjAGjP2hgnL0Co53qBc7rtyuIhLHOWVkkZr6SKvrkZahGhK5Vsml-3sj0KGAoJVf12jCTelBY5S_3E6Fj5gVDk4XKURiMzd-Z6B_Xt0gL1SHDvCZSTIhinteU71GHWWP1rmMuVesd31gj8pVQzbOo1wooj6SiQ844K5ISvwo72DJSwEZDxcH"
+              <img
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                alt="A modern airport immigration and visa processing desk"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM-SW0RfV3GEttf-88hjlxOYpe1K-QKp7gptTgONtR1UQEIupWc_lNn6SwLA8yvr5djAOpKI4wL2TlfpQymhi1JcAZf0uFh9GLuTDcuePzICNwmkl_r72w7K-flM-eBWkEyZKgLim4D26LsIW-rqwblxuskgVH4P2DKCIgU2d0xnGUOMyc8rZGwoYTWGrznP_5dV2N9goK7Azfe9BolYTUx9t253qjfSLiNeQvJUjDGfKoyH8UjtfhJxBItLq0t_GBuwYJ8qS0-30"
               />
-              <div className="absolute inset-0 bg-primary-container/10 group-hover:bg-transparent transition-colors duration-500"></div>
+              <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500" />
+            </motion.div>
+
+            {/* Image 3 */}
+            <motion.div
+              variants={fadeUp(0.3)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative rounded-2xl overflow-hidden shadow-md group h-[300px] md:h-full"
+            >
+              <img
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                alt="A premium physical boarding pass and passport on a clean surface"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5l6KN1RlgVwmkOr-oRwVRFVfFh37UJy0vJuV_o6XqFjdUiJb7iflFHNpqPJmcvDXAi-Qf86Co1HDAtuPQtP7YcFbmlX3KtcZ0Ta9dR2mSC8Jz6irMEmWwaKNp9fCm5AERdCuA54bur4KKoMiFdupmiHayRkCjUOXqUlTr-ggd9-Kgp-grHMmk5kSCinAxA2tpYJDY4nBgsUP_YXdtiGndlPnagklcFfS1iMwexiQb5d502zoeWycoLYLtQqVqZpJY8RhPfsm5U_g=w1200"
+              />
+              <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500" />
             </motion.div>
           </div>
         </Container>
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-section-gap flex items-center justify-center overflow-hidden">
+      <section className="relative py-24 flex items-center justify-center overflow-hidden bg-primary text-white">
+        {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center" 
-            style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCA-j43TbgZF9uE93tnLcDJeEfaFMvaqFo0tBO10uN3HT92CPG6xJFwlYvNuJLZToWzXl1CFDCoNNFUzdtaRCt7eWtDa4wLm3tFU579Rse9YurqPEvcD5n0gPgp6HIJWoT_9nHI2RAvxE02rs2KRJDrdNeannIZKNT59eQ40swC61K1uiL7g16nMVGi7B5DYV6S0aepQfQdF1FvTQJUgNezyHGRLa0GELBHlO84vhxD9mqaHijdJhwW')" }}
-          ></div>
-          <div className="absolute inset-0 bg-primary-container/90 mix-blend-multiply"></div>
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA-j43TbgZF9uE93tnLcDJeEfaFMvaqFo0tBO10uN3HT92CPG6xJFwlYvNuJLZToWzXl1CFDCoNNFUzdtaRCt7eWtDa4wLm3tFU579Rse9YurqPEvcD5n0gPgp6HIJWoT_9nHI2RAvxE02rs2KRJDrdNeannIZKNT59eQ40swC61K1uiL7g16nMVGi7B5DYV6S0aepQfQdF1FvTQJUgNezyHGRLa0GELBHlO84vhxD9mqaHijdJhwW"
+            alt="Luxurious airport departure hall"
+            className="w-full h-full object-cover opacity-20 scale-105"
+          />
+          <div className="absolute inset-0 bg-primary/90 mix-blend-multiply" />
         </div>
-        
+
         <Container className="relative z-10 max-w-3xl mx-auto text-center">
           <motion.div
-            variants={fadeUp()}
+            variants={fadeUp(0.1)}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="bg-white/10 backdrop-blur-[20px] border border-white/20 p-8 md:p-12 rounded-xl"
+            className="bg-white/10 backdrop-blur-md border border-white/10 p-8 md:p-12 rounded-2xl shadow-2xl"
           >
-            <h2 className="font-display-lg text-display-lg text-on-primary mb-4 drop-shadow-md">
+            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
               Need Visa or Ticketing Assistance?
             </h2>
-            <p className="font-body-lg text-body-lg text-on-primary/80 mb-8 max-w-xl mx-auto">
+            <p className="font-body text-base md:text-lg text-white/80 mb-8 max-w-xl mx-auto leading-relaxed">
               Contact Air Zigzag for assistance with travel documentation and ticketing services.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button as={Link} to="/contact" className="px-6 py-3 bg-primary-container text-on-primary font-label-bold text-label-bold rounded hover:opacity-90 transition-opacity border-none shadow-md inline-flex justify-center items-center w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center font-heading">
+              <Button as={Link} to="/contact" variant="gold" size="lg">
                 Request Assistance
               </Button>
-              <Button as={Link} to="/contact" className="px-6 py-3 bg-transparent text-[#D4AF37] border-[1.5px] border-[#D4AF37] font-label-bold text-label-bold rounded hover:bg-[#D4AF37]/10 transition-colors inline-flex justify-center items-center w-full sm:w-auto">
-                Contact Us
-              </Button>
+
             </div>
           </motion.div>
         </Container>

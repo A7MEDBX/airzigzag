@@ -3,258 +3,284 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   Car, UtensilsCrossed, Users, FileText,
-  Headphones, Check, ArrowRight, Plane
+  Headphones, BedDouble, Hotel, ShieldCheck
 } from 'lucide-react';
 import Layout from '../../components/layout/Layout';
 import Container from '../../components/common/Container/Container';
 import Button from '../../components/common/Button/Button';
-import SectionTitle from '../../components/common/SectionTitle/SectionTitle';
 import { fadeUp, fadeInLeft, fadeInRight } from '../../constants/animations';
 
-// All fresh Unsplash photos — none reused from other pages
-const heroPhoto          = 'https://images.unsplash.com/photo-1556742111-a301076d9d18?auto=format&fit=crop&w=1600&q=85'; // luxury business lounge
-const transportPhoto     = 'https://images.unsplash.com/photo-1563720360172-67b8f3dce741?auto=format&fit=crop&w=900&q=80'; // luxury limo airport ramp sunset
-const cateringPhoto      = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80'; // fine dining white table setting
+import transportImg from '../../assets/images/ancillary_transport.png';
+import cateringImg  from '../../assets/images/ancillary_catering.png';
+import hotelImg     from '../../assets/images/ancillary_hotel.png';
+
+const heroUrl  = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDqpNGF9BDhYI98QeLPfU8PqUX3Rgc-SQyVenYAq4co8ybsL7r9zsS3Hl-bR4emMli4JLNHRu02E6Xa3pvRWDU9jMEwi1vYIEbnxOmwJC1jpLx0IZJ7l6l4QIaXR6VFodfjH0TRcAvJ6_UkhFrbddvZpf8eWbOMHSGxoTQXn9lUR3tK7SbPsWhJD6rAPEX0ZqC-rbpXThuc44MFmr2_4WrEv1cRmImICBUoHbQOa5m0saXtLqJWbYh7';
+const ctaBgUrl = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCSRlwhoTvfR3JCj87zVcakySsZR7jAN2wClQPdn0HF33uTSb-G8btmGFSPKrD5ZDy0zj7gIH5KN-p5y6jKwwlBLbILuzktNSb2jU59-i96o3ob5N3eG5UgyBxYDbPWxVF0YuywbOdf2EO1S51COP4_Rd-xu2zO9tuNVXw3_dvX_BxPdJMijddKrz7WnBUJssE3d2CM3IBkEwulVDzsI9Gie5gb0V4Zk8GXDzb37E6WjcAMWAQdEBfy';
 
 export const AncillaryServices = () => {
   return (
     <Layout
-      title="Ancillary Aviation Services - Air Zigzag"
-      description="Premium ancillary services including luxury transportation, in-flight catering, hotel accommodation, crew support, and travel documentation."
+      title="Ancillary Services - Air Zigzag"
+      description="Additional aviation support services including transportation, catering, hotel accommodation and travel assistance for passengers and crew."
     >
-      {/* ── Hero ──────────────────────────────────────────────── */}
-      <section className="relative min-h-[60vh] flex items-center bg-primary overflow-hidden pt-28 pb-20">
+
+      {/* Hero */}
+      <section className="relative min-h-[80vh] flex items-center justify-center bg-primary overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
           <img
-            src={heroPhoto}
-            alt="Luxury business lounge ancillary services"
-            className="w-full h-full object-cover opacity-40"
+            src={heroUrl}
+            alt="Private aviation terminal apron at twilight"
+            className="w-full h-full object-cover opacity-65"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-primary/70 mix-blend-multiply" />
         </div>
 
-        <Container className="relative z-10 text-left">
+        <Container className="relative z-10 text-center">
           <motion.div
             variants={fadeUp()}
             initial="hidden"
             animate="visible"
-            className="max-w-3xl space-y-6"
+            className="max-w-3xl mx-auto space-y-6"
           >
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gray-300">
-              <Link to="/" className="hover:text-accent-gold transition-colors">Home</Link>
-              <span>•</span>
-              <span className="text-gray-400">Tour & Excursions</span>
-              <span>•</span>
-              <span className="text-accent-gold">Ancillary Services</span>
+            <div className="text-white/70 text-xs font-semibold uppercase tracking-widest">
+              Home / Services / Ancillary Services
             </div>
-
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight font-heading">
               Ancillary Services
             </h1>
-            <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-2xl">
-              Premium travel support including luxury transportation, catering, hotel accommodation, and concierge — tailored for passengers and crew alike.
+            <p className="text-white/90 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+              Additional aviation support services including transportation, catering, hotel
+              accommodation and travel assistance for passengers and crew.
             </p>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Button as={Link} to="/contact" variant="gold" size="lg">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Button as={Link} to="/contact" variant="primary" size="lg">
                 Contact Us
               </Button>
               <Button
                 as={Link}
-                to="/contact"
+                to="/ground-handling"
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white hover:text-primary"
+                className="border-accent-gold text-accent-gold hover:bg-accent-gold/10"
               >
-                Request Quote
+                View Services
               </Button>
             </div>
           </motion.div>
         </Container>
       </section>
 
-      {/* ── Luxury Transportation ─────────────────────────────── */}
+      {/* Luxury Transportation */}
       <section className="py-24 bg-white">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Photo */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <motion.div
               variants={fadeInRight()}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="lg:col-span-5"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-xl group">
-                <img
-                  src={transportPhoto}
-                  alt="Luxury limousine on airport tarmac at sunset"
-                  className="w-full h-[380px] object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
-                <div className="absolute top-4 left-4 bg-accent-gold px-3 py-1 rounded-full flex items-center gap-2">
-                  <Car className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-primary text-xs font-bold">Ground Transport</span>
-                </div>
-              </div>
+              <img
+                src={transportImg}
+                alt="Luxury executive sedan at private aviation terminal"
+                className="w-full h-[500px] object-cover rounded-lg shadow-xl"
+              />
             </motion.div>
 
-            {/* Content */}
             <motion.div
               variants={fadeInLeft()}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="lg:col-span-7 space-y-6"
+              className="md:pl-10 space-y-6"
             >
-              <span className="text-xs font-bold uppercase tracking-widest text-accent-gold block">
-                Premium Travel
+              <span className="text-xs font-bold uppercase tracking-widest text-gray-500 block">
+                Transportation
               </span>
               <h2 className="text-3xl md:text-4xl font-extrabold text-primary font-heading leading-tight">
                 Luxury Transportation
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                Whether you need a discreet executive chauffeur or a full airport fleet, we provide seamless door-to-door transfers for passengers, delegations, and crew — anywhere in the world.
-              </p>
 
-              {/* Sub-services */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                {[
-                  { icon: Car,   label: 'Executive Chauffeur',  desc: 'Private, discreet chauffeured transfers in premium executive sedans.' },
-                  { icon: Users, label: 'Airport Fleets',       desc: 'Multi-vehicle convoys for delegations and large passenger groups at the airport.' },
-                ].map(({ icon: Icon, label, desc }) => (
-                  <div key={label} className="flex items-start gap-4 p-4 bg-light-gray rounded-xl border border-gray-100">
-                    <div className="p-2 bg-primary/5 text-primary rounded-lg shrink-0">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-primary text-sm mb-1">{label}</p>
-                      <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
-                    </div>
+
+Air Zigzag Flight Support provides premium VIP ground transportation and accommodation services, ensuring comfort, reliability, and efficiency for passengers and crew. Our fleet of executive sedans, luxury vehicles, and chauffeured transportation offers seamless transfers between airports, hotels, business meetings, and other destinations.
+
+We also arrange high-quality hotel accommodations through our trusted hospitality partners, offering competitive rates and exceptional service. From transportation to lodging, our team coordinates every detail to deliver a smooth, secure, and professional travel experience.              </p>
+
+              <div className="space-y-8 pt-2">
+                <div className="flex gap-4 items-start">
+                  <Car className="h-6 w-6 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-xl font-bold text-primary mb-1">Executive Chauffeur</h3>
+                    <p className="text-gray-500 leading-relaxed">Professional airport transfers with experienced drivers.</p>
                   </div>
-                ))}
+                </div>
+                <div className="w-full h-px bg-gray-100" />
+                <div className="flex gap-4 items-start">
+                  <Users className="h-6 w-6 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-xl font-bold text-primary mb-1">Luxury Fleet</h3>
+                    <p className="text-gray-500 leading-relaxed">Luxury sedans and executive SUVs for passenger transport.</p>
+                  </div>
+                </div>
               </div>
-
-              <ul className="space-y-2 pt-2">
-                {['Meet & Greet at the terminal gate', 'Real-time flight tracking dispatch', 'Security-cleared professional drivers'].map(item => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-gray-600 font-medium">
-                    <div className="p-1 bg-accent-gold/15 text-accent-gold rounded-full shrink-0">
-                      <Check className="h-4 w-4" />
-                    </div>
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           </div>
         </Container>
       </section>
 
-      {/* ── Flight Catering ───────────────────────────────────── */}
-      <section className="py-24 bg-light-gray border-t border-gray-200/60">
+      {/* Flight Catering */}
+      <section className="py-24 bg-gray-50">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <motion.div
               variants={fadeInRight()}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="lg:col-span-7 space-y-6 order-2 lg:order-1"
+              className="md:pr-10 space-y-6 order-2 md:order-1"
             >
-              <span className="text-xs font-bold uppercase tracking-widest text-accent-gold block">
-                In-Flight Dining
+              <span className="text-xs font-bold uppercase tracking-widest text-gray-500 block">
+                Inflight Dining
               </span>
               <h2 className="text-3xl md:text-4xl font-extrabold text-primary font-heading leading-tight">
                 Flight Catering
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                High-quality in-flight catering services sourced from certified kitchens to satisfy passengers and crew requirements on every route. We coordinate bespoke menus, special dietary requirements, and last-minute catering changes with your preferred FBO.
+
+At Air Zigzag Flight Support, we provide premium in-flight catering tailored to the needs of every flight. Partnering with trusted catering providers, we deliver freshly prepared meals made from high-quality ingredients, ensuring exceptional taste, presentation, and on-time delivery.
+
+Our menu includes a wide selection of international cuisines, along with customized meals for special dietary, medical, and religious requirements. Whether serving business aviation, VIP flights, charter operations, cargo crews, or special missions, we ensure a seamless onboard dining experience with the highest standards of quality and service.
               </p>
-              <ul className="space-y-2 pt-2">
-                {[
-                  'Bespoke menu planning & customization',
-                  'Certified kitchen partners at major hubs',
-                  'Special dietary & allergy-aware options',
-                  'On-board crockery, cutlery & linen arrangements',
-                ].map(item => (
-                  <li key={item} className="flex items-center gap-3 text-sm text-gray-600 font-medium">
-                    <div className="p-1 bg-accent-gold/15 text-accent-gold rounded-full shrink-0">
-                      <Check className="h-4 w-4" />
-                    </div>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="pt-2">
-                <Button as={Link} to="/contact" variant="primary" size="md" icon={ArrowRight} iconPosition="right">
-                  Request Catering
-                </Button>
-              </div>
             </motion.div>
 
-            {/* Photo */}
             <motion.div
               variants={fadeInLeft()}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="lg:col-span-5 order-1 lg:order-2"
+              className="order-1 md:order-2"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-xl group">
-                <img
-                  src={cateringPhoto}
-                  alt="Fine dining in-flight catering setup on white table"
-                  className="w-full h-[380px] object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
-                <div className="absolute top-4 left-4 bg-accent-gold px-3 py-1 rounded-full flex items-center gap-2">
-                  <UtensilsCrossed className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-primary text-xs font-bold">Flight Catering</span>
-                </div>
+              <img
+                src={cateringImg}
+                alt="Gourmet in-flight catering on luxury private jet"
+                className="w-full h-[500px] object-cover rounded-lg shadow-xl"
+              />
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Hotel Accommodation */}
+      <section className="py-24 bg-white">
+        <Container>
+          <motion.div
+            variants={fadeUp()}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-extrabold text-primary font-heading">
+              Hotel Accommodation
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <motion.div
+              variants={fadeUp(0)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative overflow-hidden rounded-lg p-8 shadow-md bg-white border border-gray-100 group hover:shadow-xl transition-all duration-300"
+            >
+              <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-300 z-0">
+                <img src={hotelImg} alt="" className="w-full h-full object-cover grayscale" />
+              </div>
+              <div className="relative z-10">
+                <Hotel className="h-9 w-9 text-accent-gold mb-6" />
+                <h3 className="text-2xl font-bold text-primary font-heading mb-3">
+                  Passenger Accommodation
+                </h3>
+                <p className="text-gray-500 leading-relaxed">
+                  Coordinated bookings at leading international hotels for a restorative stay.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp(0.1)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative overflow-hidden rounded-lg p-8 shadow-md bg-white border border-gray-100 group hover:shadow-xl transition-all duration-300"
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-5 bg-primary transition-opacity duration-300 z-0" />
+              <div className="relative z-10">
+                <BedDouble className="h-9 w-9 text-accent-gold mb-6" />
+                <h3 className="text-2xl font-bold text-primary font-heading mb-3">
+                  Crew Accommodation
+                </h3>
+                <p className="text-gray-500 leading-relaxed">
+                  Convenient and high-quality lodging solutions tailored for flight crew requirements.
+                </p>
               </div>
             </motion.div>
           </div>
         </Container>
       </section>
 
-      {/* ── Additional Support Services ───────────────────────── */}
-      <section className="py-20 bg-light-gray border-t border-gray-200/60">
+      {/* Additional Support Services */}
+      <section className="py-24 bg-gray-50">
         <Container>
-          <SectionTitle
-            subtitle="Support"
-            title="Additional Support Services"
-            alignment="center"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 max-w-5xl mx-auto">
+          <motion.div
+            variants={fadeUp()}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-extrabold text-primary font-heading">
+              Additional Support Services
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 icon: Headphones,
                 title: 'Crew Support',
-                desc: 'Comprehensive care for flight crews including accommodations, transport, rest scheduling, and on-call assistance throughout their layover.',
+                desc: 'Operational assistance for flight crews including accommodation and transportation coordination.',
+                delay: 0,
               },
               {
                 icon: Car,
                 title: 'Transportation',
-                desc: 'End-to-end ground logistics for passengers and crew — from scheduled airport runs to on-demand charter vehicles.',
+                desc: 'Ground transportation arrangements for passengers and crew.',
+                delay: 0.1,
+              },
+              {
+                icon: ShieldCheck,
+                title: 'Visa & Documentation',
+                desc: 'Assistance with visa requirements and travel documentation when required.',
+                delay: 0.2,
               },
               {
                 icon: FileText,
-                title: 'Travel Documentation',
-                desc: 'Visa coordination, entry requirements, and travel document assistance to ensure smooth border crossing for every traveler.',
+                title: 'Travel Assistance',
+                desc: 'Comprehensive travel coordination to ensure smooth journeys for all passengers and crew.',
+                delay: 0.3,
               },
-            ].map(({ icon: Icon, title, desc }, i) => (
+            ].map(({ icon: Icon, title, desc, delay }) => (
               <motion.div
                 key={title}
-                variants={fadeUp(i * 0.1)}
+                variants={fadeUp(delay)}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 text-left group"
+                className="bg-white rounded-lg p-6 shadow-sm border-t-2 border-transparent hover:border-accent-gold hover:shadow-md transition-all duration-300 cursor-pointer"
               >
-                <div className="p-3 bg-primary/5 text-primary rounded-xl w-fit mb-4 group-hover:bg-accent-gold transition-colors duration-300">
-                  <Icon className="h-6 w-6" />
-                </div>
+                <Icon className="h-7 w-7 text-primary mb-4" />
                 <h4 className="text-lg font-bold text-primary font-heading mb-2">{title}</h4>
                 <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
               </motion.div>
@@ -263,53 +289,7 @@ export const AncillaryServices = () => {
         </Container>
       </section>
 
-      {/* ── CTA Banner ────────────────────────────────────────── */}
-      <section className="relative py-24 bg-primary overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=80"
-            alt="Private jet silhouette ready for departure"
-            className="w-full h-full object-cover opacity-20 blur-sm"
-          />
-          <div className="absolute inset-0 bg-primary/80" />
-        </div>
 
-        <Container className="relative z-10 max-w-3xl text-center">
-          <motion.div
-            variants={fadeUp()}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <div className="flex justify-center mb-4">
-              <div className="p-3 bg-accent-gold/20 rounded-full">
-                <Plane className="h-8 w-8 text-accent-gold" />
-              </div>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight font-heading">
-              Ready to Elevate Your Journey?
-            </h2>
-            <p className="text-gray-300 text-lg max-w-xl mx-auto">
-              Contact Air Zigzag to arrange premium ancillary support for passengers and crew — tailored to your exact requirements.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center pt-2">
-              <Button as={Link} to="/contact" variant="gold" size="lg">
-                Contact Us
-              </Button>
-              <Button
-                as={Link}
-                to="/contact"
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-primary"
-              >
-                Request Quote
-              </Button>
-            </div>
-          </motion.div>
-        </Container>
-      </section>
     </Layout>
   );
 };
