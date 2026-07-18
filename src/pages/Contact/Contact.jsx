@@ -2,20 +2,20 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Mail, Phone, MapPin, Compass } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { toast } from 'sonner';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Layout from '../../components/layout/Layout';
-import PageHero from '../../components/layout/PageHero/PageHero';
 import Container from '../../components/common/Container/Container';
-import SectionTitle from '../../components/common/SectionTitle/SectionTitle';
 import Button from '../../components/common/Button/Button';
-import Card from '../../components/common/Card/Card';
+import { fadeUp } from '../../constants/animations';
 
 const contactFormSchema = z.object({
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  firstName: z.string().min(2, { message: 'First name must be at least 2 characters.' }),
+  lastName: z.string().min(2, { message: 'Last name must be at least 2 characters.' }),
   email: z.string().email({ message: 'Please enter a valid email address.' }),
-  subject: z.string().min(5, { message: 'Subject must be at least 5 characters.' }),
-  message: z.string().min(10, { message: 'Message must be at least 10 characters.' }),
+  phone: z.string().min(5, { message: 'Please enter a valid phone number.' }),
 });
 
 export const Contact = () => {
@@ -39,172 +39,190 @@ export const Contact = () => {
     }
   };
 
-  const breadcrumb = [{ label: 'Contact', path: '/contact' }];
-
   return (
     <Layout
-      title="Contact 24/7 Operations - Air Zigzag"
-      description="Get in touch with our round-the-clock OCC dispatch team for urgent landing permits and flight clearances."
+      title="Contact Us - Air Zigzag"
+      description="Contact Air Zigzag regarding flight support services, flight permits, ground handling, fuel services, flight planning, catering, and operational inquiries."
     >
-      <PageHero
-        title="Contact Our Operations"
-        description="Available 24/7/365 to handle your flight permissions, fueling, and ground handling requests."
-        breadcrumbItems={breadcrumb}
-      />
+      {/* Hero Section */}
+      <section className="relative w-full min-h-[60vh] md:min-h-[70vh] flex items-center justify-center pt-20">
+        <div className="absolute inset-0 w-full h-full z-0">
+          <img 
+            alt="Operations Control Center" 
+            className="w-full h-full object-cover" 
+            src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
+          />
+          <div className="absolute inset-0 bg-[#0B172A]/85 mix-blend-multiply"></div>
+        </div>
+        
+        <Container className="relative z-10 w-full flex flex-col items-center text-center">
+          <motion.div
+            variants={fadeUp()}
+            initial="hidden"
+            animate="visible"
+            className="max-w-2xl mx-auto"
+          >
+            <div className="mb-6 inline-flex items-center rounded-full border border-white/20 px-4 py-1.5 text-xs font-semibold text-white uppercase tracking-wider backdrop-blur-sm">
+              <Link to="/" className="hover:text-brand-gold transition-colors">Home</Link>
+              <span className="mx-2 text-white/50">/</span>
+              <span>Contact</span>
+            </div>
+            
+            <h1 className="font-display-lg text-4xl md:text-5xl font-bold text-white mb-6">
+              Contact Us
+            </h1>
+            
+            <p className="font-body-lg text-lg text-white/80 mb-10 leading-relaxed max-w-xl mx-auto">
+              Contact Air Zigzag regarding flight support services, flight permits, ground handling, fuel services, flight planning, catering, and operational inquiries.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button 
+                onClick={() => document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-3.5 bg-brand-gold text-primary-container font-semibold rounded hover:bg-white transition-colors border-none min-w-[160px]"
+              >
+                Send Inquiry
+              </Button>
+              <Button 
+                as={Link} 
+                to="/services" 
+                className="px-8 py-3.5 border border-white/30 text-white bg-transparent font-semibold rounded hover:bg-white/10 transition-colors backdrop-blur-sm min-w-[160px]"
+              >
+                Our Services
+              </Button>
+            </div>
+          </motion.div>
+        </Container>
+      </section>
 
-      <section className="py-20 bg-white">
+      {/* Main Content */}
+      <section id="contact-form" className="py-20 bg-[#FAFAFA]">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Contact Details Column */}
-            <div className="lg:col-span-1 space-y-8">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-accent-gold mb-2 block">
-                  Operations Control Center
-                </span>
-                <h2 className="text-3xl font-bold text-primary font-heading tracking-tight">
-                  Always Online.
-                </h2>
-                <p className="text-gray-500 mt-4 leading-relaxed">
-                  Our dispatch and flight coordination operations run non-stop. For urgent permits or changes to active flights, email or call directly.
-                </p>
-              </div>
-
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/5 rounded-lg text-primary">
-                    <Phone className="h-6 w-6" />
-                  </div>
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+            
+            {/* Form Container */}
+            <motion.div 
+              variants={fadeUp()}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="flex-1 bg-white border border-gray-100 rounded-2xl p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+            >
+              <h2 className="text-2xl font-bold text-primary-container mb-8">
+                Send a Message
+              </h2>
+              
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h3 className="font-heading font-semibold text-primary">Direct Hotline</h3>
-                    <a href="tel:+442079460958" className="text-gray-600 hover:text-accent-gold transition-colors">
-                      +44 20 7946 0958
-                    </a>
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2">
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      {...register('firstName')}
+                      className={`w-full px-4 py-3.5 rounded-lg border bg-gray-50/50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 transition-colors ${
+                        errors.firstName ? 'border-red-500 focus:ring-red-500/20' : 'border-gray-200 focus:ring-brand-gold/20 focus:border-brand-gold'
+                      }`}
+                      placeholder="Enter your first name"
+                    />
+                    {errors.firstName && <p className="mt-1 text-xs text-red-500">{errors.firstName.message}</p>}
+                  </div>
+                  
+                  <div>
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      {...register('lastName')}
+                      className={`w-full px-4 py-3.5 rounded-lg border bg-gray-50/50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 transition-colors ${
+                        errors.lastName ? 'border-red-500 focus:ring-red-500/20' : 'border-gray-200 focus:ring-brand-gold/20 focus:border-brand-gold'
+                      }`}
+                      placeholder="Enter your last name"
+                    />
+                    {errors.lastName && <p className="mt-1 text-xs text-red-500">{errors.lastName.message}</p>}
+                  </div>
+                  
+                  <div>
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      {...register('email')}
+                      className={`w-full px-4 py-3.5 rounded-lg border bg-gray-50/50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 transition-colors ${
+                        errors.email ? 'border-red-500 focus:ring-red-500/20' : 'border-gray-200 focus:ring-brand-gold/20 focus:border-brand-gold'
+                      }`}
+                      placeholder="name@company.com"
+                    />
+                    {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
+                  </div>
+                  
+                  <div>
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2">
+                      Phone Number
+                    </label>
+                    <input
+                      type="text"
+                      {...register('phone')}
+                      className={`w-full px-4 py-3.5 rounded-lg border bg-gray-50/50 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 transition-colors ${
+                        errors.phone ? 'border-red-500 focus:ring-red-500/20' : 'border-gray-200 focus:ring-brand-gold/20 focus:border-brand-gold'
+                      }`}
+                      placeholder="+1 (555) 000-0000"
+                    />
+                    {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone.message}</p>}
                   </div>
                 </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/5 rounded-lg text-primary">
-                    <Mail className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-heading font-semibold text-primary">Email Dispatch</h3>
-                    <a href="mailto:ops@airzigzag.com" className="text-gray-600 hover:text-accent-gold transition-colors">
+                
+                <div className="pt-4">
+                  <Button
+                    type="submit"
+                    loading={isSubmitting}
+                    className="w-full md:w-auto px-10 py-3.5 bg-primary-container text-white font-semibold rounded-lg hover:bg-primary transition-colors border-none"
+                  >
+                    Send Message
+                  </Button>
+                </div>
+              </form>
+            </motion.div>
+            
+            {/* Sidebar Cards */}
+            <motion.div 
+              variants={fadeUp(0.2)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="lg:w-[400px]"
+            >
+              <div className="bg-[#121B2E] rounded-2xl p-8 relative overflow-hidden shadow-xl h-full">
+                {/* Decorative element */}
+                <div className="absolute top-0 right-0 -mr-8 -mt-8 opacity-10">
+                  <svg width="200" height="200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L22 22H2L12 2Z" fill="white"/>
+                  </svg>
+                </div>
+                
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold text-white mb-10">
+                    Operations Desk
+                  </h3>
+                  
+                  <div className="bg-[#19243C] border border-white/5 rounded-xl p-6">
+                    <div className="w-10 h-10 rounded-lg bg-[#222E4A] flex items-center justify-center mb-4">
+                      <Mail className="text-brand-gold w-5 h-5" />
+                    </div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 mb-1">
+                      General Inquiries & Support
+                    </p>
+                    <a href="mailto:ops@airzigzag.com" className="text-white text-lg hover:text-brand-gold transition-colors">
                       ops@airzigzag.com
                     </a>
                   </div>
                 </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/5 rounded-lg text-primary">
-                    <MapPin className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-heading font-semibold text-primary">Headquarters</h3>
-                    <span className="text-gray-600">
-                      London, England, UK
-                    </span>
-                  </div>
-                </div>
               </div>
-            </div>
-
-            {/* Form Column */}
-            <div className="lg:col-span-2">
-              <Card animate={false} className="p-8 border border-gray-200/80 shadow-md">
-                <h3 className="text-2xl font-bold text-primary font-heading mb-6">
-                  Send a Direct Message
-                </h3>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Your Name
-                      </label>
-                      <input
-                        type="text"
-                        {...register('name')}
-                        className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors ${
-                          errors.name
-                            ? 'border-red-500 focus:ring-red-500/20'
-                            : 'border-gray-300 focus:ring-primary/20 focus:border-primary'
-                        }`}
-                        placeholder="John Doe"
-                      />
-                      {errors.name && (
-                        <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        {...register('email')}
-                        className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors ${
-                          errors.email
-                            ? 'border-red-500 focus:ring-red-500/20'
-                            : 'border-gray-300 focus:ring-primary/20 focus:border-primary'
-                        }`}
-                        placeholder="operator@company.com"
-                      />
-                      {errors.email && (
-                        <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      {...register('subject')}
-                      className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors ${
-                        errors.subject
-                          ? 'border-red-500 focus:ring-red-500/20'
-                          : 'border-gray-300 focus:ring-primary/20 focus:border-primary'
-                      }`}
-                      placeholder="e.g. Flight Clearance Request / Permit Support"
-                    />
-                    {errors.subject && (
-                      <p className="mt-1 text-xs text-red-500">{errors.subject.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Message Details
-                    </label>
-                    <textarea
-                      rows={5}
-                      {...register('message')}
-                      className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors ${
-                        errors.message
-                          ? 'border-red-500 focus:ring-red-500/20'
-                          : 'border-gray-300 focus:ring-primary/20 focus:border-primary'
-                      }`}
-                      placeholder="Outline flight routes, scheduled dates, aircraft tail details, etc."
-                    />
-                    {errors.message && (
-                      <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>
-                    )}
-                  </div>
-
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="lg"
-                    loading={isSubmitting}
-                    className="w-full sm:w-auto"
-                  >
-                    Send Message
-                  </Button>
-                </form>
-              </Card>
-            </div>
+            </motion.div>
+            
           </div>
         </Container>
       </section>

@@ -7,8 +7,23 @@
   --color-accent-gold: #D4AF37;
   --color-light-gray: #F8F9FA;
   
+  --color-background: #fbf8fc;
+  --color-on-surface: #1b1b1e;
+  --color-on-surface-variant: #44474d;
+  --color-primary-container: #0b1d3a;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f5f3f6;
+  --color-surface: #fbf8fc;
+  --color-brand-gold: #D4AF37;
+
   --font-heading: 'Manrope', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-headline-lg: 'Manrope', sans-serif;
+  --font-headline-md: 'Manrope', sans-serif;
+  --font-display-lg: 'Manrope', sans-serif;
+  --font-body-lg: 'Plus Jakarta Sans', sans-serif;
+  --font-body-md: 'Plus Jakarta Sans', sans-serif;
+  --font-label-bold: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
