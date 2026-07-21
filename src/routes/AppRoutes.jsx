@@ -12,6 +12,7 @@ const HotelAccommodation = lazy(() => import('../pages/HotelAccommodation/HotelA
 const VIPTransportation = lazy(() => import('../pages/VIPTransportation/VIPTransportation'));
 const VisaTicketing = lazy(() => import('../pages/VisaTicketing/VisaTicketing'));
 const Contact = lazy(() => import('../pages/Contact/Contact'));
+const CargoOperations = lazy(() => import('../pages/CargoOperations/CargoOperations'));
 
 export const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ export const AppRoutes = () => {
       <Route path="/vip-transportation" element={<VIPTransportation />} />
       <Route path="/visa-ticketing" element={<VisaTicketing />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/cargo-operations" element={<CargoOperations />} />
     </Routes>
   );
 };

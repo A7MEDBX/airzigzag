@@ -14,8 +14,8 @@ import jetA1FuelingNight from '../../assets/images/jet_a1_fueling_night.jpg';
 
 // High-quality external Unsplash photos for aircraft fueling (not reused, professional)
 const jetA1FuelingPhoto = jetA1FuelingNight; // Night-time 747 refueling with Aviation Fueling Service trucks
-const avgasFuelingPhoto = 'https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=800&q=80'; // General aviation propeller plane refuel context
-const globalFuelTruckPhoto = 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=800&q=80'; // Large fuel truck refuels aircraft on runway tarmac
+const avgasFuelingPhoto = '/avgas-fuel.jpg';
+const globalFuelTruckPhoto = '/worldwide-fuel.jpg';
 
 export const FuelServices = () => {
   const breadcrumbItems = [

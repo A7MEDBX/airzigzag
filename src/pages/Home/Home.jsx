@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Fuel, Users, Clock, Globe, ArrowRight, Play } from 'lucide-react';
+import { ShieldCheck, Fuel, Users, Clock, Globe, ArrowRight, Play, ChevronLeft, ChevronRight, Map, Utensils, Hotel, Car, Package, UserCheck, Plane, Wrench, Luggage, Bed, Building, FileText } from 'lucide-react';
 import Layout from '../../components/layout/Layout';
 import Container from '../../components/common/Container/Container';
 import Button from '../../components/common/Button/Button';
@@ -53,6 +53,31 @@ const AnimatedCounter = ({ value, suffix = "" }) => {
 };
 
 export const Home = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    { src: '/home-hero.png', alt: 'Aircraft Flying at Sunset' },
+    { src: '/home-sky.png', alt: 'Aircraft Flying in Blue Sky' },
+    { src: '/home-jet.png', alt: 'Private Jet Flying over Mountains' },
+    { src: '/home-climb-sunset.png', alt: 'Commercial Jet Climbing at Sunset' },
+    { src: '/home-clouds-sunrise.png', alt: 'Passenger Jet Climbing Above Clouds' },
+    { src: '/home-golden-sunset.png', alt: 'Jet Airliner Climbing Steeply at Sunset' }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
   return (
     <Layout
       title="Air Zigzag - Elevating Global Flight Support"
@@ -62,14 +87,37 @@ export const Home = () => {
       <section className="relative min-h-[90vh] flex items-center bg-primary overflow-hidden pt-20">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <img
-            src={heroJetBg}
-            alt="Private Jet on Runway"
-            className="w-full h-full object-cover opacity-65"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
+          <AnimatePresence initial={false}>
+            <motion.img
+              key={currentSlide}
+              src={slides[currentSlide].src}
+              alt={slides[currentSlide].alt}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.75 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent z-10" />
         </div>
+
+        {/* Slider Navigation Arrows */}
+        <button
+          onClick={handlePrev}
+          className="absolute left-6 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-accent-gold/25 text-white hover:text-accent-gold border border-white/20 transition-all duration-300 backdrop-blur-sm focus:outline-none"
+          aria-label="Previous image"
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+        <button
+          onClick={handleNext}
+          className="absolute right-6 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-accent-gold/25 text-white hover:text-accent-gold border border-white/20 transition-all duration-300 backdrop-blur-sm focus:outline-none"
+          aria-label="Next image"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
 
         <Container className="relative z-10 py-16 md:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -174,7 +222,7 @@ export const Home = () => {
               </Link>
             </Card>
 
-            <Card hoverEffect delay={0.3}>
+            <Card hoverEffect delay={0.2}>
               <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
                 <Fuel className="h-8 w-8" />
               </div>
@@ -189,7 +237,7 @@ export const Home = () => {
               </Link>
             </Card>
 
-            <Card hoverEffect delay={0.5}>
+            <Card hoverEffect delay={0.3}>
               <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
                 <Users className="h-8 w-8" />
               </div>
@@ -200,6 +248,156 @@ export const Home = () => {
                 White-glove FBO services, luxury catering, and secure crew transportation worldwide.
               </p>
               <Link to="/ground-handling" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
+                EXPLORE <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+
+            <Card hoverEffect delay={0.4}>
+              <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
+                <Map className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary font-heading mb-4">
+                Flight Planning
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
+                Professional flight planning with optimized routing, weather analysis, fuel calculations, and operational support.
+              </p>
+              <Link to="/flight-planning" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
+                EXPLORE <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+
+            <Card hoverEffect delay={0.5}>
+              <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
+                <Utensils className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary font-heading mb-4">
+                Flight Catering
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
+                Premium in-flight catering with fresh ingredients, international cuisine, and customized meal options for every mission.
+              </p>
+              <Link to="/ancillary-services" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
+                EXPLORE <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+
+            <Card hoverEffect delay={0.6}>
+              <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
+                <Hotel className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary font-heading mb-4">
+                Hotel Accommodation
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
+                Comfortable hotel accommodation for passengers and crew through trusted hospitality partners worldwide.
+              </p>
+              <Link to="/hotel-accommodation" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
+                EXPLORE <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+
+            <Card hoverEffect delay={0.7}>
+              <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
+                <Car className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary font-heading mb-4">
+                VIP Transportation
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
+                Luxury chauffeur-driven transportation, airport transfers, executive vehicles, and worldwide VIP mobility solutions.
+              </p>
+              <Link to="/vip-transportation" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
+                EXPLORE <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+
+            <Card hoverEffect delay={0.8}>
+              <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
+                <Package className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary font-heading mb-4">
+                Cargo Operations
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
+                Reliable cargo flight support, cargo handling, customs coordination, loading and unloading, and logistics services.
+              </p>
+              <Link to="/cargo-operations" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
+                EXPLORE <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+
+            <Card hoverEffect delay={0.9}>
+              <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
+                <Wrench className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary font-heading mb-4">
+                Ground Support Equipment
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
+                GPU, ASU, ACU, potable water, lavatory services, aircraft stairs, and complete GSE coordination.
+              </p>
+              <Link to="/ground-handling" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
+                EXPLORE <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+
+            <Card hoverEffect delay={1.0}>
+              <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
+                <Bed className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary font-heading mb-4">
+                Crew Accommodation
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
+                High-quality hotel arrangements for flight crews with comfortable accommodations and reliable support.
+              </p>
+              <Link to="/hotel-accommodation" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
+                EXPLORE <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+
+            <Card hoverEffect delay={1.1}>
+              <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
+                <Building className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary font-heading mb-4">
+                Passenger Accommodation
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
+                Premium hotel solutions for passengers with carefully selected accommodation partners.
+              </p>
+              <Link to="/hotel-accommodation" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
+                EXPLORE <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+
+            <Card hoverEffect delay={1.2}>
+              <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
+                <FileText className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary font-heading mb-4">
+                Overflight Permits
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
+                Worldwide overflight permit coordination with fast processing and regulatory compliance.
+              </p>
+              <Link to="/flight-permits" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
+                EXPLORE <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Card>
+
+            <Card hoverEffect delay={1.3}>
+              <div className="p-4 bg-primary/5 text-primary rounded-xl w-fit mb-6">
+                <ShieldCheck className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-primary font-heading mb-4">
+                Landing Permits
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 flex-grow">
+                Global landing permit services including urgent requests and airport authority coordination.
+              </p>
+              <Link to="/flight-permits" className="text-accent-gold font-bold flex items-center gap-2 hover:gap-3 transition-all mt-auto group">
                 EXPLORE <ArrowRight className="h-4 w-4" />
               </Link>
             </Card>

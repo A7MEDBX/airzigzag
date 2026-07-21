@@ -38,6 +38,7 @@ export const Navbar = () => {
         { name: 'Ground Handling', path: '/ground-handling' },
         { name: 'Flight Planning', path: '/flight-planning' },
         { name: 'Fuel Services', path: '/fuel-services' },
+        { name: 'Cargo Operations', path: '/cargo-operations' },
         { name: 'Catering', path: '/ancillary-services' },
       ],
     },
